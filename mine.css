@@ -1,0 +1,4 @@
+.scrollbox {
+    height: 60%;
+    overflow-y: auto !important;
+}
