@@ -1,0 +1,2892 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>环境数据分析方法</title>
+    <meta charset="utf-8">
+    <meta name="author" content="盛虎" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css/duke-blue.css" rel="stylesheet" />
+    <link href="libs/remark-css/hygge-duke.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/leaflet/leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet/leaflet.js"></script>
+    <link href="libs/leafletfix/leafletfix.css" rel="stylesheet" />
+    <script src="libs/Proj4Leaflet/proj4-compressed.js"></script>
+    <script src="libs/Proj4Leaflet/proj4leaflet.js"></script>
+    <link href="libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-binding/leaflet.js"></script>
+    <link rel="stylesheet" href="libs/cc-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="libs/figure-captions.css" type="text/css" />
+    <link rel="stylesheet" href="mine.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# 环境数据分析方法
+## ——基于R的应用
+### 盛虎
+### 2018年7月14日
+
+---
+
+
+
+
+# Warm-Up Questions
+
+--
+.content-box-blue[.center[
+### 数据重要吗？
+]]
+
+--
+.content-box-green[.center[
+### 数据分析的工具重要吗？
+]]
+
+--
+.content-box-yellow[.center[
+### 数据分析的理论方法重要吗？
+]]
+
+
+---
+background-image: url(https://github.com/OSGeo/OSGeoLive/blob/master/desktop-conf/osgeo-desktop.png?raw=true)
+class: center, middle
+
+# R基础
+
+.pull-left[
+[&lt;img src="https://www.r-project.org/logo/Rlogo.png" width="113" height="88" alt="R"&gt;](https://www.r-project.org/)
+]
+
+.pull-right[
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/07/RStudio-Logo-Blue-Gray-600x211.png" width="250" height="88" alt="RStudio"&gt;](https://www.rstudio.com/)
+]
+
+
+---
+
+# R是什么？
+
+.content-box-yellow[.Large[R是一个以数据为中心的生态系统，它包括：
+
+- 强大的.red[数据分析]工具
+
+- 强大的.red[数据可视化]工具
+
+- 强大的.red[互联网交互]工具
+
+- 强大的.red[合作与交流]社区
+
+- ……
+
+]]
+
+---
+
+# RStudio工具集（不限于此）
+
+&lt;style&gt;
+.img-wrap{
+  width:900px;
+}
+&lt;/style&gt;
+
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/shiny.png" width="100" height="116"&gt;](http://shiny.rstudio.com/)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/tidyverse.png" width="100" height="116"&gt;](http://www.tidyverse.org/)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/rmarkdown.png" width="100" height="116"&gt;](http://rmarkdown.rstudio.com/)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/lubridate.png" width="100" height="116"&gt;](http://lubridate.tidyverse.org/)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/ggplot2.png" width="100" height="116"&gt;](http://ggplot2.tidyverse.org/)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/knitr.png" width="100" height="116"&gt;](http://yihui.name/knitr/)
+
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/devtools.png" width="100" height="116"&gt;](https://github.com/hadley/devtools)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/readxl.png" width="100" height="116"&gt;](http://readxl.tidyverse.org/)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/readr.png" width="100" height="116"&gt;](http://readr.tidyverse.org/)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/stringr.png" width="100" height="116"&gt;](http://stringr.tidyverse.org/)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/packrat.png" width="100" height="116"&gt;](http://rstudio.github.io/packrat/)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/magrittr.png" width="100" height="116"&gt;](http://magrittr.tidyverse.org/)
+
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/sparklyr.png" width="100" height="116"&gt;](https://spark.rstudio.com/index.html)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/dplyr.png" width="100" height="116"&gt;](http://dplyr.tidyverse.org/)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/tidyr.png" width="100" height="116"&gt;](http://tidyr.tidyverse.org/)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/tibble.png" width="100" height="116"&gt;](http://tibble.tidyverse.org/)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/roxygen2.png" width="100" height="116"&gt;](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/broom.png" width="100" height="116"&gt;](https://cran.r-project.org/web/packages/broom/vignettes/broom.html)
+
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/purrr.png" width="100" height="116"&gt;](http://purrr.tidyverse.org/)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/testthat.png" width="100" height="116"&gt;](https://github.com/hadley/testthat)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/plumber.png" width="100" height="116"&gt;](https://cran.r-project.org/web/packages/plumber/README.html)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/hms.png" width="100" height="116"&gt;](https://github.com/tidyverse/hms)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/forcats.png" width="100" height="116"&gt;](https://cran.r-project.org/web/packages/forcats/index.html)
+[&lt;img src="https://www.rstudio.com/wp-content/uploads/2014/04/feather.png" width="100" height="116"&gt;](https://blog.rstudio.com/2016/03/29/feather/)
+
+---
+
+# 一个小Case——我们在哪里？
+
+
+```r
+library(leaflet)
+library(leafletCN)
+leaflet() %&gt;% amap() %&gt;% addMarkers(118.953301, 32.117207)
+```
+
+<div id="htmlwidget-987134556832a20caa89" style="width:100%;height:432px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-987134556832a20caa89">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",{"minZoom":3,"maxZoom":17,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false},null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://amap.com\">amp.com<\/a >"}]},{"method":"addMarkers","args":[32.117207,118.953301,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[32.117207,32.117207],"lng":[118.953301,118.953301]}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+# R的操作方法——编程
+
+--
+
+.content-box-yellow[.large[——*编程？不可能编程！这辈子都不可能编程！！！*]]
+
+--
+
+&lt;br&gt;
+
+.Large[实事上，绝大多数情况下，R处理的都是表格数据，如下：]
+
+
+```r
+knitr::kable(head(iris), format = 'html')
+```
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Sepal.Length &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Sepal.Width &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Petal.Length &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Petal.Width &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Species &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4.6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# 不得不学的R基础——数据类型
+
+.pull-left[
+
+- 数值型（numeric）
+
+
+```r
+c(1, 2, 3, 4, 5)
+```
+
+```
+## [1] 1 2 3 4 5
+```
+
+&lt;br&gt;
+
+- 字符型（character）
+
+
+```r
+c("Lucy", "Lily", "Jim")
+```
+
+```
+## [1] "Lucy" "Lily" "Jim"
+```
+
+]
+
+.pull-right[
+
+- 因子型（factor）
+
+
+```r
+factor(c("cat", "dog", "cat"))
+```
+
+```
+## [1] cat dog cat
+## Levels: cat dog
+```
+
+&lt;br&gt;
+
+- 逻辑型（logical）
+
+
+```r
+c(TRUE, FALSE, TRUE)
+```
+
+```
+## [1]  TRUE FALSE  TRUE
+```
+
+]
+
+---
+
+# 不得不学的R基础——数据结构
+
+.pull-left[
+
+- 向量（vector）
+
+
+```r
+c(1, 2, 3, 4, 5)
+```
+
+```
+## [1] 1 2 3 4 5
+```
+
+- 列表（list）
+
+
+```r
+list(a = c(1, 2), b = "Lucy", d = c(TRUE, FALSE, TRUE))
+```
+
+```
+## $a
+## [1] 1 2
+## 
+## $b
+## [1] "Lucy"
+## 
+## $d
+## [1]  TRUE FALSE  TRUE
+```
+
+]
+
+.pull-right[
+
+- 矩阵（matrix）
+
+
+```r
+matrix(1:6, nrow = 2, byrow = TRUE)
+```
+
+```
+##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    4    5    6
+```
+
+&lt;br&gt;
+
+- 数据框（data.frame）
+
+
+```r
+data.frame(a = c(1, 2), b = "Lucy", d = c(TRUE, FALSE))
+```
+
+```
+##   a    b     d
+## 1 1 Lucy  TRUE
+## 2 2 Lucy FALSE
+```
+
+]
+
+
+---
+
+# 数据类型转化
+
+.pull-left[
+
+- 原始数据：
+
+
+```r
+x &lt;- c(0:2, 1)
+x
+```
+
+```
+## [1] 0 1 2 1
+```
+
+- 转化为逻辑型：
+
+
+```r
+as.logical(x)
+```
+
+```
+## [1] FALSE  TRUE  TRUE  TRUE
+```
+
+- 转化为字符型：
+
+
+```r
+as.character(x)
+```
+
+```
+## [1] "0" "1" "2" "1"
+```
+
+]
+
+.pull-right[
+
+- 转化为因子型：
+
+
+```r
+as.factor(x)
+```
+
+```
+## [1] 0 1 2 1
+## Levels: 0 1 2
+```
+
+- 字符型转化为数值型：
+
+
+```r
+as.numeric(as.character(x))
+```
+
+```
+## [1] 0 1 2 1
+```
+
+- 因子型转化为数值型：
+
+
+```r
+as.numeric(as.factor(x))
+```
+
+```
+## [1] 1 2 3 2
+```
+
+]
+
+
+---
+
+# 数据取用——$或[[
+
+- $——针对有名称列表（list）和数据框（data.frame）元素的取用
+
+
+```r
+x &lt;- list(a = c(1, 2), b = "Lucy", d = c(TRUE, FALSE, TRUE))
+x$b
+```
+
+```
+## [1] "Lucy"
+```
+
+```r
+y &lt;- data.frame(a = c(1, 2), b = "Lucy", d = c(TRUE, FALSE))
+y$b
+```
+
+```
+## [1] Lucy Lucy
+## Levels: Lucy
+```
+
+- [[——针对列表（list）数据类型元素的取用
+
+
+```r
+x &lt;- list(a = c(1, 2), b = "Lucy", d = c(TRUE, FALSE, TRUE))
+x[[2]]
+```
+
+```
+## [1] "Lucy"
+```
+
+---
+
+# 数据取用——[
+
+- [——针对.red[非]列表（list）数据类型元素的取用
+
+
+```r
+x &lt;- 1:5
+x[2]
+```
+
+```
+## [1] 2
+```
+
+```r
+y &lt;- matrix(1:6, nrow = 2, byrow = TRUE)
+y[2, 3]
+```
+
+```
+## [1] 6
+```
+
+```r
+z &lt;- data.frame(a = c(1, 2), b = "Lucy", d = c(TRUE, FALSE))
+z[2, 3]
+```
+
+```
+## [1] FALSE
+```
+
+```r
+z$d[2]
+```
+
+```
+## [1] FALSE
+```
+
+---
+
+# 数据查看（1）
+
+- 万用的.red[`str`]
+
+
+```r
+x &lt;- data.frame(a = c(1, 2), b = "Lucy", d = c(TRUE, FALSE))
+str(x)
+```
+
+```
+## 'data.frame':	2 obs. of  3 variables:
+##  $ a: num  1 2
+##  $ b: Factor w/ 1 level "Lucy": 1 1
+##  $ d: logi  TRUE FALSE
+```
+
+- 汇总统计：.red[`summary`]
+
+
+```r
+summary(x)
+```
+
+```
+##        a           b         d          
+##  Min.   :1.00   Lucy:2   Mode :logical  
+##  1st Qu.:1.25            FALSE:1        
+##  Median :1.50            TRUE :1        
+##  Mean   :1.50                           
+##  3rd Qu.:1.75                           
+##  Max.   :2.00
+```
+
+---
+
+# 数据查看（2）
+
+.pull-left[
+
+- 查看少数几行：.red[`head`]或者.red[`tail`]
+
+
+```r
+x &lt;- data.frame(v1 = 1:20, v2 = letters[1:20])
+head(x, 3)
+```
+
+```
+##   v1 v2
+## 1  1  a
+## 2  2  b
+## 3  3  c
+```
+
+```r
+tail(x, 3)
+```
+
+```
+##    v1 v2
+## 18 18  r
+## 19 19  s
+## 20 20  t
+```
+
+- RStudio中的神器：.red[`View`]
+
+
+```r
+View(x)
+```
+
+]
+
+.pull-right[
+
+- “千万别用”.red[`print(x)`]或者.red[`x`]
+
+
+```r
+print(x)
+```
+
+```
+##    v1 v2
+## 1   1  a
+## 2   2  b
+## 3   3  c
+## 4   4  d
+## 5   5  e
+## 6   6  f
+## 7   7  g
+## 8   8  h
+## 9   9  i
+## 10 10  j
+## 11 11  k
+## 12 12  l
+## 13 13  m
+## 14 14  n
+## 15 15  o
+## 16 16  p
+## 17 17  q
+## 18 18  r
+## 19 19  s
+## 20 20  t
+```
+
+]
+
+---
+
+# 数据输入与输出
+
+- 数据输出
+
+
+```r
+data("iris")
+write.csv(iris, file = "iris.csv", row.names = FALSE, na = "")
+```
+
+- 数据输入
+
+
+```r
+x &lt;- read.csv("iris.csv", as.is = TRUE)
+str(x)
+```
+
+
+```
+## 'data.frame':	150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : chr  "setosa" "setosa" "setosa" "setosa" ...
+```
+
+---
+
+# 数据可视化
+
+
+```r
+library(ggplot2)
+p &lt;- ggplot(mtcars, aes(wt, mpg))
+p + geom_point(color = "blue")
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-28-1.svg)&lt;!-- --&gt;
+
+---
+
+# 代码可读性提升
+
+- 管道操作符
+
+```r
+f(x, y) &lt;==&gt; x %&gt;% f(y)
+f(x, y) &lt;==&gt; y %&gt;% f(x, .)
+```
+
+- 应用例子
+
+
+```r
+# 创建一个6x4矩阵并求其每行均值中最大的那个数
+library(magrittr)
+set.seed(1)
+x &lt;- round(rnorm(24) * 10)
+# 常规做法
+max(rowMeans(matrix(x, 6)))
+# 管道操作符做法
+x %&gt;% matrix(6) %&gt;%
+  rowMeans() %&gt;%
+  max()
+```
+
+.footnote[
+详细用法可参考：&lt;http://blog.fens.me/r-magrittr/&gt;
+]
+
+---
+
+# R操作小结
+
+- 4种数据类型：数值型、字符型、因子型、逻辑型
+
+- 4种数据结构：向量、列表、矩阵、数据框
+
+- 数据取用方法：$或[或[[
+
+- 数据查看方法：`str`、`summary`、`head`、`tail`、`View`
+
+- 数据输入与输出：`read.csv`和`write.csv`
+
+- 数据可视化：`ggplot`
+
+- 代码可读性提升：`%&gt;%`
+
+.full-width[.content-box-yellow[
+如果遇到某个函数不知道怎么使用，请使用帮助`help(x)`或者`?x`，这里`x`即为你查询的函数。比如
+]]
+
+.footnote[
+参考资料：
+[1] [R for Beginners（中文版）](http://ape-package.ird.fr/ep/R4beg_cn_2.0.pdf)
+[2] [R for Data Science](http://r4ds.had.co.nz/index.html)
+]
+
+
+---
+background-image: url(http://img.netbian.com/file/2017/0822/5138aac74a57b6b65be2ed18c286d18a.jpg)
+class: inverse, center, middle
+
+# 环境数据分析方法
+
+---
+
+# 背景资料
+
+- 水体富营养化导致水华暴发，从而危害水生生态系统和人类的健康。
+
+- 为了有效控制水华暴发，对水体中藻类进行长期观测与预报十分必要。
+
+- 在一项研究中，收集了欧洲多条不同河流一年内不同时间内的水样。
+
+- 对于每个水样，测定了多种水质指标及7种有毒藻类出现频率。
+
+- 同时在水样收集过程中，也记录了一些环境因子，如收集的季节、河流大小和水流的速度。
+
+- 研究目的：根据收集的数据建立水华预报模型。从而实现：
+
+  - 提供一种廉价的藻类预报方法。
+  
+  - 识别影响藻类频率的理化因素。
+
+.footnote[
+详细信息请查看：&lt;https://archive.ics.uci.edu/ml/datasets/Coil+1999+Competition+Data&gt;
+]
+
+---
+
+# 数据清单
+
+本案例的数据来自于ERUDIT研究网络，并被用于1999年的COIL国际数据分析竞赛。目前可以从UCI机器学习数据库下载这些数据&lt;sup&gt;[1]&lt;/sup&gt;。
+
+数据分为两个数据集：训练集有200个样本，包含所有的数据信息；测试集有140个样本，不包含7种藻类的数据信息。这两个数据集的每一条记录是该河流一个季节三个月内水样监测综合结果。
+
+数据除了包含采样季节（`season`）、河流大小（`size`）和河水流速（`speed`）外，还包括以下指标：
+
+.pull-left[
+- pH最大值（`mxPH`）
+- DO最小值（`mnO2`）
+- Cl平均值（`Cl`）
+- NO&lt;sub&gt;3&lt;/sub&gt;&lt;sup&gt;-&lt;/sup&gt;-N平均值（`NO3`）
+]
+.pull-right[
+- NH&lt;sub&gt;4&lt;/sub&gt;&lt;sup&gt;+&lt;/sup&gt;-N平均值（`NH4`）
+- PO&lt;sub&gt;4&lt;/sub&gt;&lt;sup&gt;3-&lt;/sup&gt;平均值（`oPO4`）
+- TP平均值（`PO4`）
+- Chla平均值（`Chla`）
+]
+
+另外，还包含7种藻类出现频率的指标，记为`a1`~`a7`。
+
+.footnote[
+[1]数据下载地址：&lt;https://archive.ics.uci.edu/ml/machine-learning-databases/coil-mld/&gt;
+]
+
+---
+
+# 数据读取
+
+
+```r
+algae &lt;- read.csv("data/analysis.csv", as.is = TRUE)
+str(algae)
+```
+
+```
+## 'data.frame':	200 obs. of  18 variables:
+##  $ season: chr  "winter" "spring" "autumn" "spring" ...
+##  $ size  : chr  "small" "small" "small" "small" ...
+##  $ speed : chr  "medium" "medium" "medium" "medium" ...
+##  $ mxPH  : num  8 8.35 8.1 8.07 8.06 8.25 8.15 8.05 8.7 7.93 ...
+##  $ mnO2  : num  9.8 8 11.4 4.8 9 13.1 10.3 10.6 3.4 9.9 ...
+##  $ Cl    : num  60.8 57.8 40 77.4 55.4 ...
+##  $ NO3   : num  6.24 1.29 5.33 2.3 10.42 ...
+##  $ NH4   : num  578 370 346.7 98.2 233.7 ...
+##  $ oPO4  : num  105 428.8 125.7 61.2 58.2 ...
+##  $ PO4   : num  170 558.8 187.1 138.7 97.6 ...
+##  $ Chla  : num  50 1.3 15.6 1.4 10.5 ...
+##  $ a1    : num  0 1.4 3.3 3.1 9.2 15.1 2.4 18.2 25.4 17 ...
+##  $ a2    : num  0 7.6 53.6 41 2.9 14.6 1.2 1.6 5.4 0 ...
+##  $ a3    : num  0 4.8 1.9 18.9 7.5 1.4 3.2 0 2.5 0 ...
+##  $ a4    : num  0 1.9 0 0 0 0 3.9 0 0 2.9 ...
+##  $ a5    : num  34.2 6.7 0 1.4 7.5 22.5 5.8 5.5 0 0 ...
+##  $ a6    : num  8.3 0 0 0 4.1 12.6 6.8 8.7 0 0 ...
+##  $ a7    : num  0 2.1 9.7 1.4 1 2.9 0 0 0 1.7 ...
+```
+
+---
+
+# 数据查看——`summary`
+
+
+```r
+summary(algae)
+```
+
+.scrollbox[
+
+```
+##     season              size              speed          
+##  Length:200         Length:200         Length:200        
+##  Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character  
+##                                                          
+##                                                          
+##                                                          
+##                                                          
+##       mxPH            mnO2              Cl         
+##  Min.   :5.600   Min.   : 1.500   Min.   :  0.222  
+##  1st Qu.:7.700   1st Qu.: 7.725   1st Qu.: 10.981  
+##  Median :8.060   Median : 9.800   Median : 32.730  
+##  Mean   :8.012   Mean   : 9.118   Mean   : 43.636  
+##  3rd Qu.:8.400   3rd Qu.:10.800   3rd Qu.: 57.824  
+##  Max.   :9.700   Max.   :13.400   Max.   :391.500  
+##  NA's   :1       NA's   :2        NA's   :10       
+##       NO3              NH4                oPO4       
+##  Min.   : 0.050   Min.   :    5.00   Min.   :  1.00  
+##  1st Qu.: 1.296   1st Qu.:   38.33   1st Qu.: 15.70  
+##  Median : 2.675   Median :  103.17   Median : 40.15  
+##  Mean   : 3.282   Mean   :  501.30   Mean   : 73.59  
+##  3rd Qu.: 4.446   3rd Qu.:  226.95   3rd Qu.: 99.33  
+##  Max.   :45.650   Max.   :24064.00   Max.   :564.60  
+##  NA's   :2        NA's   :2          NA's   :2       
+##       PO4              Chla               a1       
+##  Min.   :  1.00   Min.   :  0.200   Min.   : 0.00  
+##  1st Qu.: 41.38   1st Qu.:  2.000   1st Qu.: 1.50  
+##  Median :103.29   Median :  5.475   Median : 6.95  
+##  Mean   :137.88   Mean   : 13.971   Mean   :16.92  
+##  3rd Qu.:213.75   3rd Qu.: 18.308   3rd Qu.:24.80  
+##  Max.   :771.60   Max.   :110.456   Max.   :89.80  
+##  NA's   :2        NA's   :12                       
+##        a2               a3               a4        
+##  Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
+##  1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.000  
+##  Median : 3.000   Median : 1.550   Median : 0.000  
+##  Mean   : 7.458   Mean   : 4.309   Mean   : 1.992  
+##  3rd Qu.:11.375   3rd Qu.: 4.925   3rd Qu.: 2.400  
+##  Max.   :72.600   Max.   :42.800   Max.   :44.600  
+##                                                    
+##        a5               a6               a7        
+##  Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
+##  1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.000  
+##  Median : 1.900   Median : 0.000   Median : 1.000  
+##  Mean   : 5.064   Mean   : 5.964   Mean   : 2.495  
+##  3rd Qu.: 7.500   3rd Qu.: 6.925   3rd Qu.: 2.400  
+##  Max.   :44.400   Max.   :77.600   Max.   :31.600  
+## 
+```
+]
+
+---
+
+# 数据查看——`describe`
+
+
+```r
+Hmisc::describe(algae)
+```
+
+.scrollbox[
+
+```
+## algae 
+## 
+##  18  Variables      200  Observations
+## ------------------------------------------------------------
+## season 
+##        n  missing distinct 
+##      200        0        4 
+##                                       
+## Value      autumn spring summer winter
+## Frequency      40     53     45     62
+## Proportion  0.200  0.265  0.225  0.310
+## ------------------------------------------------------------
+## size 
+##        n  missing distinct 
+##      200        0        3 
+##                                
+## Value       large medium  small
+## Frequency      45     84     71
+## Proportion  0.225  0.420  0.355
+## ------------------------------------------------------------
+## speed 
+##        n  missing distinct 
+##      200        0        3 
+##                                
+## Value        high    low medium
+## Frequency      84     33     83
+## Proportion  0.420  0.165  0.415
+## ------------------------------------------------------------
+## mxPH 
+##        n  missing distinct     Info     Mean      Gmd 
+##      199        1       72    0.998    8.012   0.6471 
+##      .05      .10      .25      .50      .75      .90 
+##    7.081    7.340    7.700    8.060    8.400    8.700 
+##      .95 
+##    8.873 
+## 
+## lowest : 5.60 5.70 6.40 6.50 6.60, highest: 9.00 9.06 9.10 9.50 9.70
+## ------------------------------------------------------------
+## mnO2 
+##        n  missing distinct     Info     Mean      Gmd 
+##      198        2       88        1    9.118    2.629 
+##      .05      .10      .25      .50      .75      .90 
+##    4.485    5.770    7.725    9.800   10.800   11.700 
+##      .95 
+##   11.815 
+## 
+## lowest :  1.5  1.8  3.2  3.3  3.4, highest: 12.5 12.6 12.9 13.1 13.4
+## ------------------------------------------------------------
+## Cl 
+##        n  missing distinct     Info     Mean      Gmd 
+##      190       10      178        1    43.64    43.78 
+##      .05      .10      .25      .50      .75      .90 
+##    3.061    4.970   10.981   32.730   57.823   88.600 
+##      .95 
+##  130.087 
+## 
+## lowest :   0.222   0.800   1.170   1.450   1.549
+## highest: 173.750 187.183 194.750 208.364 391.500
+## ------------------------------------------------------------
+## NO3 
+##        n  missing distinct     Info     Mean      Gmd 
+##      198        2      192        1    3.282    2.884 
+##      .05      .10      .25      .50      .75      .90 
+##   0.4023   0.6912   1.2960   2.6750   4.4463   6.1916 
+##      .95 
+##   7.9369 
+## 
+## lowest :  0.050  0.102  0.130  0.230  0.267
+## highest:  9.248  9.715  9.773 10.416 45.650
+## ------------------------------------------------------------
+## NH4 
+##        n  missing distinct     Info     Mean      Gmd 
+##      198        2      179        1    501.3    816.2 
+##      .05      .10      .25      .50      .75      .90 
+##    10.00    15.00    38.33   103.17   226.95   805.33 
+##      .95 
+##  1922.87 
+## 
+## 0 (93, 0.470), 200 (66, 0.333), 400 (11, 0.056), 600 (5,
+## 0.025), 800 (3, 0.015), 1000 (4, 0.020), 1200 (2, 0.010),
+## 1400 (2, 0.010), 1800 (1, 0.005), 2000 (3, 0.015), 2200 (1,
+## 0.005), 3400 (1, 0.005), 3600 (1, 0.005), 4000 (1, 0.005),
+## 5800 (1, 0.005), 6400 (1, 0.005), 8800 (1, 0.005), 24000
+## (1, 0.005)
+## ------------------------------------------------------------
+## oPO4 
+##        n  missing distinct     Info     Mean      Gmd 
+##      198        2      173        1    73.59    85.46 
+##      .05      .10      .25      .50      .75      .90 
+##     2.00     3.94    15.70    40.15    99.33   193.21 
+##      .95 
+##   248.34 
+## 
+## lowest :   1.000   1.250   1.333   1.625   1.800
+## highest: 346.167 412.333 428.750 467.500 564.600
+## ------------------------------------------------------------
+## PO4 
+##        n  missing distinct     Info     Mean      Gmd 
+##      198        2      189        1    137.9    133.9 
+##      .05      .10      .25      .50      .75      .90 
+##    6.455   11.350   41.375  103.285  213.750  286.100 
+##      .95 
+##  345.650 
+## 
+## lowest :   1.000   2.500   3.000   4.000   6.000
+## highest: 558.750 586.000 607.167 624.733 771.600
+## ------------------------------------------------------------
+## Chla 
+##        n  missing distinct     Info     Mean      Gmd 
+##      188       12      131        1    13.97    17.93 
+##      .05      .10      .25      .50      .75      .90 
+##    0.500    0.800    2.000    5.475   18.308   31.817 
+##      .95 
+##   61.733 
+## 
+## lowest :   0.200   0.300   0.400   0.500   0.600
+## highest:  88.255  92.667  93.683  98.817 110.456
+## ------------------------------------------------------------
+## a1 
+##        n  missing distinct     Info     Mean      Gmd 
+##      200        0      121    0.994    16.92    21.52 
+##      .05      .10      .25      .50      .75      .90 
+##     0.00     0.00     1.50     6.95    24.80    50.72 
+##      .95 
+##    64.33 
+## 
+## lowest :  0.0  1.1  1.2  1.4  1.5, highest: 75.8 81.9 82.7 86.6 89.8
+## ------------------------------------------------------------
+## a2 
+##        n  missing distinct     Info     Mean      Gmd 
+##      200        0       89    0.951    7.458    10.19 
+##      .05      .10      .25      .50      .75      .90 
+##     0.00     0.00     0.00     3.00    11.38    21.50 
+##      .95 
+##    28.38 
+## 
+## lowest :  0.0  1.0  1.2  1.4  1.5, highest: 40.7 40.9 41.0 53.6 72.6
+## ------------------------------------------------------------
+## a3 
+##        n  missing distinct     Info     Mean      Gmd 
+##      200        0       79    0.949    4.309    6.131 
+##      .05      .10      .25      .50      .75      .90 
+##    0.000    0.000    0.000    1.550    4.925   13.510 
+##      .95 
+##   20.275 
+## 
+## lowest :  0.0  1.0  1.1  1.2  1.4, highest: 24.8 25.3 25.9 35.1 42.8
+## ------------------------------------------------------------
+## a4 
+##        n  missing distinct     Info     Mean      Gmd 
+##      200        0       50    0.838    1.992    3.032 
+##      .05      .10      .25      .50      .75      .90 
+##    0.000    0.000    0.000    0.000    2.400    5.000 
+##      .95 
+##    7.605 
+## 
+## lowest :  0.0  1.0  1.1  1.2  1.3, highest: 11.5 12.7 13.4 28.8 44.6
+## ------------------------------------------------------------
+## a5 
+##        n  missing distinct     Info     Mean      Gmd 
+##      200        0       81    0.938    5.064    6.923 
+##      .05      .10      .25      .50      .75      .90 
+##     0.00     0.00     0.00     1.90     7.50    14.91 
+##      .95 
+##    20.04 
+## 
+## lowest :  0.0  1.0  1.1  1.2  1.4, highest: 28.8 34.2 34.3 35.6 44.4
+## ------------------------------------------------------------
+## a6 
+##        n  missing distinct     Info     Mean      Gmd 
+##      200        0       76    0.847    5.964    9.323 
+##      .05      .10      .25      .50      .75      .90 
+##    0.000    0.000    0.000    0.000    6.925   17.110 
+##      .95 
+##   31.815 
+## 
+## lowest :  0.0  1.0  1.2  1.4  1.5, highest: 42.7 49.4 52.5 64.6 77.6
+## ------------------------------------------------------------
+## a7 
+##        n  missing distinct     Info     Mean      Gmd 
+##      200        0       51    0.882    2.496    3.817 
+##      .05      .10      .25      .50      .75      .90 
+##     0.00     0.00     0.00     1.00     2.40     6.10 
+##      .95 
+##    10.88 
+## 
+## lowest :  0.0  1.0  1.1  1.2  1.4, highest: 22.1 25.6 30.1 31.2 31.6
+## ------------------------------------------------------------
+```
+]
+
+---
+
+# 描述性统计——位置的度量
+
+所谓位置的度量就是那些用来描述定量资料的集中趋势的统计量。常用的有均值、众数、中位数、百分位数等。
+
+
+```r
+x &lt;- algae$PO4
+# 均值
+mean(x, na.rm = TRUE)
+# 中位数
+median(x, na.rm = TRUE)
+# 百分位数
+quantile(x, na.rm = TRUE)
+# 批量求均值——对行
+apply(algae[1:6, 12:18], 1, mean)
+# 批量求均值——对列
+apply(algae[,12:18], 2, mean)
+```
+
+---
+
+# 描述性统计——分散程度的度量
+
+表示数据分散（或变异）程度的特征量有方差、标准差、极差、四分位极差、变异系数和标准误等。
+
+
+```r
+x &lt;- algae$PO4
+# 方差
+var(x, na.rm = TRUE)
+# 标准差
+sd(x, na.rm = TRUE)
+# 变异系数
+sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)
+# 变异系数函数
+cv &lt;- function(x, na.rm = TRUE) {
+  sd(x, na.rm = na.rm) / mean(x, na.rm = na.rm)
+}
+cv(x)
+# 极差
+max(x, na.rm = TRUE) - min(x, na.rm = TRUE)
+# 四分位极差
+quantile(x, 0.75, na.rm = TRUE) - quantile(x, 0.25, na.rm = TRUE)
+```
+
+---
+
+# 描述性统计——分布形状的度量
+
+### 偏度系数（skewness）
+
+偏度系数刻划数据的对称性。关于均值对称的数据其偏度系数为0，右侧更分散的数据偏度系数为正，左侧更分散的数据偏度系数为负。样本的偏度系数计算公式为：
+
+`$$g_{1}=\dfrac{\sqrt{n\left(n-1\right)}}{n-2}\dfrac{m_{3}}{m_{2}^{3/2}}=\dfrac{\sqrt{n\left(n-1\right)}}{n-2}\dfrac{\frac{1}{n}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{3}}{\left(\frac{1}{n}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{3/2}}$$`
+
+.center[
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Negative_and_positive_skew_diagrams_%28English%29.svg/446px-Negative_and_positive_skew_diagrams_%28English%29.svg.png)
+]
+
+
+```r
+library(moments)
+skewness(algae$PO4, na.rm = TRUE)
+```
+
+```
+## [1] 1.673214
+```
+
+---
+
+# 描述性统计——分布形状的度量
+
+### 峰度系数（kurtosis）
+
+样本的峰度系数计算公式：
+
+`$$g_{2}=\dfrac{m_{4}}{m_{2}^{2}}-3=\dfrac{\frac{1}{n}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{4}}{\left(\frac{1}{n}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\right)^{2}}-3$$`
+
+- 当数据的总体分布为正态分布时，峰度系数近似为0。
+
+- 当分布较正态分布的尾部更分散时，峰度系数为正；否则为负。
+
+- 当峰度系数为正时，两侧极端数据较多；当峰度系数为负时，两侧极端数据较少。
+
+
+```r
+library(moments)
+x &lt;- algae$PO4
+kurtosis(x, na.rm = TRUE) - 3
+```
+
+```
+## [1] 4.115403
+```
+
+
+---
+
+# 统计图——直方图
+
+
+```r
+library(ggplot2)
+ggplot(algae, aes(x = PO4)) +
+  geom_histogram(aes(y = ..density..), color = "grey") +
+  geom_density(color = "red")
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-39-1.svg)&lt;!-- --&gt;
+
+---
+
+# 统计图——QQ图
+
+
+```r
+library(ggplot2)
+library(qqplotr)
+ggplot(algae, aes(sample = PO4)) +
+  stat_qq_band() + stat_qq_point() + stat_qq_line(color = "red") +
+  labs(x = "Theoretical Quantiles", y = "Sample Quantiles")
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-40-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# 统计图——箱线图
+
+
+```r
+library(tidyverse)
+library(forcats)
+alg &lt;- mutate(algae, speed = fct_relevel(speed, c("low", "medium", "high")))
+ggplot(alg, aes(x = speed, y = PO4)) + geom_boxplot()
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-41-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# 统计图——小提琴图
+
+
+```r
+library(tidyverse)
+library(forcats)
+alg &lt;- mutate(algae, speed = fct_relevel(speed, c("low", "medium", "high")))
+ggplot(alg, aes(x = speed, y = PO4)) + geom_violin() + geom_jitter()
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-42-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# 统计图——分块图
+
+分块图是在基本统计图的基础上按照分类变量进行分块作图的方式，这种方式能够比较不同的分类变量对统计分析结果的影响。
+
+.scrollbox[
+
+```r
+library(tidyverse)
+library(forcats)
+alg &lt;- algae %&gt;% filter(!is.na(PO4)) %&gt;%
+  mutate(
+    speed = fct_relevel(speed, c("low", "medium", "high")),
+    PO4 = cut(PO4, quantile(PO4, c(0, .25, .5, .75, 1)),
+              include.lowest = TRUE) %&gt;%
+      paste("PO4", ., sep = ": ")
+  )
+ggplot(alg, aes(x = speed, y = a1, color = speed)) +
+  geom_boxplot() + geom_jitter() + coord_flip() +
+  facet_wrap( ~ PO4) + guides(color = FALSE)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-43-1.svg)&lt;!-- --&gt;
+]
+
+---
+
+# 缺失值处理
+
+当我们处理含有缺失值的数据时，通常可以采用剔除法和填补法。以下列出了几种最常见的策略：
+
+### 剔除法——将含有缺失值的案例剔除
+- 列表删除（Listwise Deletion）：删除含有缺失值的所有观测，又称为完全样本分析（Complete Case Analysis）
+- 成对删除（Pairwise Deletion）：删除变量对中含有缺失值的观测，又称为可用样本分析（Available Case Analysis）
+
+### 填补法——用最可能的数对缺失值进行填补
+- 用出现频率最高的值填补缺失值
+- 根据变量之间的相关关系填补缺失值
+- 根据案例之间的相似性填补缺失值
+- 使用能够处理缺失值数据的工具
+
+---
+
+# 缺失值处理——列表删除
+
+
+```r
+library(tidyverse)
+filter(algae, !complete.cases(algae))
+alg &lt;- na.omit(algae)
+which(is.na(alg))
+```
+
+.scrollbox[
+
+```
+##    season   size  speed mxPH mnO2    Cl   NO3 NH4    oPO4
+## 1  autumn  small   high 6.80 11.1 9.000 0.630  20   4.000
+## 2  spring  small   high 8.00   NA 1.450 0.810  10   2.500
+## 3  winter  small    low   NA 12.6 9.000 0.230  10   5.000
+## 4  winter  small   high 6.60 10.8    NA 3.245  10   1.000
+## 5  spring  small medium 5.60 11.8    NA 2.220   5   1.000
+## 6  autumn  small medium 5.70 10.8    NA 2.550  10   1.000
+## 7  spring  small   high 6.60  9.5    NA 1.320  20   1.000
+## 8  summer  small   high 6.60 10.8    NA 2.640  10   2.000
+## 9  autumn  small medium 6.60 11.3    NA 4.170  10   1.000
+## 10 spring  small medium 6.50 10.4    NA 5.970  10   2.000
+## 11 summer  small medium 6.40   NA    NA    NA  NA      NA
+## 12 autumn  small   high 7.83 11.7 4.083 1.328  18   3.333
+## 13 winter medium   high 9.70 10.8 0.222 0.406  10  22.444
+## 14 spring  large    low 9.00  5.8    NA 0.900 142 102.000
+## 15 winter  large   high 8.00 10.9 9.055 0.825  40  21.083
+## 16 winter  large medium 8.00  7.6    NA    NA  NA      NA
+##        PO4  Chla   a1   a2  a3   a4  a5  a6  a7
+## 1       NA  2.70 30.3  1.9 0.0  0.0 2.1 1.4 2.1
+## 2    3.000  0.30 75.8  0.0 0.0  0.0 0.0 0.0 0.0
+## 3    6.000  1.10 35.5  0.0 0.0  0.0 0.0 0.0 0.0
+## 4    6.500    NA 24.3  0.0 0.0  0.0 0.0 0.0 0.0
+## 5    1.000    NA 82.7  0.0 0.0  0.0 0.0 0.0 0.0
+## 6    4.000    NA 16.8  4.6 3.9 11.5 0.0 0.0 0.0
+## 7    6.000    NA 46.8  0.0 0.0 28.8 0.0 0.0 0.0
+## 8   11.000    NA 46.9  0.0 0.0 13.4 0.0 0.0 0.0
+## 9    6.000    NA 47.1  0.0 0.0  0.0 0.0 1.2 0.0
+## 10  14.000    NA 66.9  0.0 0.0  0.0 0.0 0.0 0.0
+## 11  14.000    NA 19.4  0.0 0.0  2.0 0.0 3.9 1.7
+## 12   6.667    NA 14.4  0.0 0.0  0.0 0.0 0.0 0.0
+## 13  10.111    NA 41.0  1.5 0.0  0.0 0.0 0.0 0.0
+## 14 186.000 68.05  1.7 20.6 1.5  2.2 0.0 0.0 0.0
+## 15  56.091    NA 16.8 19.6 4.0  0.0 0.0 0.0 0.0
+## 16      NA    NA  0.0 12.5 3.7  1.0 0.0 0.0 4.9
+```
+
+```
+## integer(0)
+```
+]
+
+---
+
+# 缺失值处理——成对删除
+
+主要用于数据的成对比较，比如计算各个变量的相关性时可以选择采用`pairwise.complete.obs`的方法，如
+
+
+```r
+cor(algae[, 4:11], use = "pairwise.complete.obs")
+```
+
+.scrollbox[
+
+```
+##             mxPH        mnO2          Cl         NO3
+## mxPH  1.00000000 -0.16861234  0.13610778 -0.13098054
+## mnO2 -0.16861234  1.00000000 -0.27833251  0.09944373
+## Cl    0.13610778 -0.27833251  1.00000000  0.22504091
+## NO3  -0.13098054  0.09944373  0.22504091  1.00000000
+## NH4  -0.09353577 -0.08747825  0.07191298  0.72144352
+## oPO4  0.15899936 -0.41616295  0.39105351  0.14458782
+## PO4   0.18990814 -0.48748615  0.45744903  0.16860096
+## Chla  0.44596182 -0.15326480  0.14985650  0.13967921
+##              NH4       oPO4        PO4        Chla
+## mxPH -0.09353577  0.1589994  0.1899081  0.44596182
+## mnO2 -0.08747825 -0.4161629 -0.4874862 -0.15326480
+## Cl    0.07191298  0.3910535  0.4574490  0.14985650
+## NO3   0.72144352  0.1445878  0.1686010  0.13967921
+## NH4   1.00000000  0.2272372  0.2081804  0.08894652
+## oPO4  0.22723723  1.0000000  0.9143652  0.11562132
+## PO4   0.20818040  0.9143652  1.0000000  0.25362130
+## Chla  0.08894652  0.1156213  0.2536213  1.00000000
+```
+]
+
+---
+
+# 缺失值处理——成对删除
+
+主要用于数据的成对比较，比如计算各个变量的相关性时可以选择采用`pairwise.complete.obs`的方法，如
+
+
+```r
+symnum(cor(algae[, 4:11], use = "pairwise.complete.obs"))
+```
+
+.scrollbox[
+
+```
+##      mP mO Cl NO NH o P Ch
+## mxPH 1                    
+## mnO2    1                 
+## Cl         1              
+## NO3           1           
+## NH4           ,  1        
+## oPO4    .  .        1     
+## PO4     .  .        * 1   
+## Chla .                  1 
+## attr(,"legend")
+## [1] 0 ' ' 0.3 '.' 0.6 ',' 0.8 '+' 0.9 '*' 0.95 'B' 1
+```
+]
+
+---
+
+# 缺失值处理——成对删除
+
+主要用于数据的成对比较，比如计算各个变量的相关性时可以选择采用`pairwise.complete.obs`的方法，如
+
+.scrollbox[
+
+```r
+library(corrplot)
+cm &lt;- cor(algae[, 4:11], use = "pairwise.complete.obs")
+corrplot(cm, type = "upper", tl.pos = "d")
+corrplot(cm, add = TRUE, type = "lower", method = "number",
+         diag = FALSE, tl.pos = "n", cl.pos = "n")
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-50-1.svg)&lt;!-- --&gt;
+]
+
+---
+
+# 缺失值处理——高频值填补
+
+
+```r
+# 直接对元素进行替换
+alg &lt;- algae
+alg[48, "mxPH"] &lt;- mean(alg$mxPH, na.rm = TRUE)
+alg[48, "mxPH"]
+```
+
+```
+## [1] 8.011734
+```
+
+```r
+alg[is.na(alg$Chla), "Chla"] &lt;- median(alg$Chla, na.rm = TRUE)
+alg[is.na(alg$Chla), "Chla"]
+```
+
+```
+## numeric(0)
+```
+
+```r
+# 批量替换
+alg &lt;- algae[-DMwR2::manyNAs(algae), ]
+alg &lt;- DMwR2::centralImputation(alg)
+which(is.na(alg))
+```
+
+```
+## integer(0)
+```
+
+
+
+---
+
+# 缺失值处理——相关关系填补
+
+
+```r
+alg &lt;- algae[-DMwR2::manyNAs(algae), ]
+lm(PO4 ~ oPO4, data = alg)
+alg[28, "PO4"] &lt;- 42.897 + 1.293 * alg[28, "oPO4"]
+algae[,"PO4"]
+```
+
+.scrollbox[
+
+```
+## 
+## Call:
+## lm(formula = PO4 ~ oPO4, data = alg)
+## 
+## Coefficients:
+## (Intercept)         oPO4  
+##      42.897        1.293
+```
+
+```
+##   [1] 170.000 558.750 187.057 138.700  97.580  56.667
+##   [7] 111.750  77.434  71.000  46.600  20.750  19.000
+##  [13]  17.000  15.000  61.600  98.250  50.000  57.833
+##  [19]  61.500 771.600 586.000  18.000  40.000  27.500
+##  [25]  11.500  44.136  13.600      NA  45.000  19.000
+##  [31] 142.000 304.000 130.750  47.000  23.000  84.460
+##  [37]   3.000   3.000 253.250 255.280 296.000 175.046
+##  [43] 344.600 326.857  40.667  43.500  39.000   6.000
+##  [49] 121.000  20.812  49.333  22.900  11.800  11.818
+##  [55]   6.500   1.000   4.000   6.000  11.000   6.000
+##  [61]  14.000  14.000   6.667   6.750   7.200   6.000
+##  [67]  10.750   2.500 351.600 313.600 279.066 152.333
+##  [73]  58.623 249.250 233.500 215.500 102.333 105.727
+##  [79] 111.375 108.000  56.667  60.000 104.000  69.930
+##  [85] 214.000 254.600 169.001 607.167 624.733 303.333
+##  [91] 391.750 265.250 232.833 244.000 218.000 138.500
+##  [97] 239.000 235.667 205.875 211.667 186.500 154.125
+## [103] 183.667 292.625 285.714 201.778 275.143 124.200
+## [109] 141.833 132.546  17.333  26.000  16.662 102.571
+## [115]  86.997  10.111  18.293  13.200 432.909 320.400
+## [121] 287.000 262.727 222.286 122.000 127.222  89.625
+## [127] 284.000 277.333 177.625  72.900  82.444  66.750
+## [133] 173.750 317.000  84.000 213.000  88.500 115.000
+## [139]  98.143 143.750 197.143  35.200  23.485 200.231
+## [145] 147.833 276.000 123.333  75.207 116.200 188.667
+## [151]  72.696 116.200  34.000  76.333  58.374 361.000
+## [157] 236.000 125.800  54.916  75.333 186.000 252.500
+## [163] 269.667  46.438  85.000 171.272 232.900 146.452
+## [169] 246.667 219.909 272.222 388.167 167.900 137.778
+## [175] 194.100 221.278  21.300  11.000  14.354   7.000
+## [181]   6.200   7.654  16.000  56.091  52.875 228.364
+## [187]  85.400  87.125 101.455 127.000  81.558  50.455
+## [193] 120.889  91.111  61.444  79.750  75.904 140.220
+## [199]      NA 140.517
+```
+]
+
+
+---
+
+# 缺失值处理——相似性填补
+
+样本之间的相似性可以用欧氏距离来确定
+
+`$$d\left(x,y\right)=\sqrt{\sum_{i=1}^{n}\left(x_{i}-y_{i}\right)^{2}}$$`
+
+基于距离的权重为
+
+`$$w\left(d\right)=e^{-d}$$`
+
+
+```r
+# 采用加权平均值的填补方法
+alg &lt;- algae[-DMwR2::manyNAs(algae), ]
+alg &lt;- DMwR2::knnImputation(alg, k = 10)
+# 采用中位数的填充方法
+alg &lt;- algae[-DMwR2::manyNAs(algae), ]
+alg &lt;- DMwR2::knnImputation(alg, k = 10, meth = "median")
+```
+
+---
+
+# 假设检验
+
+- 正态性检验（Shapiro检验）
+
+
+```r
+set.seed(1)
+normaly_disb &lt;- rnorm(200, mean = 5, sd = 1) # 正态分布数据
+shapiro.test(normaly_disb)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  normaly_disb
+## W = 0.99274, p-value = 0.4272
+```
+
+```r
+shapiro.test(algae$Chla) # 实际数据
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  algae$Chla
+## W = 0.65571, p-value &lt; 2.2e-16
+```
+
+---
+
+# 假设检验
+
+- Box-Cox正态变换
+
+`$$y_{i}^{\left(\lambda\right)}=\begin{cases}
+\frac{y_{i}^{\lambda}-1}{\lambda} &amp; \text{if }\lambda\ne0\\
+\log\left(y_{i}\right) &amp; \text{if }\lambda=0
+\end{cases}$$`
+
+
+```r
+out &lt;- MASS::boxcox(lm(algae$Chla ~ 1), lambda = seq(-1, 1, 0.1),
+                    plotit = FALSE, interp = TRUE)
+(lambda &lt;- out$x[which.max(out$y)])
+```
+
+```
+## [1] 0.01010101
+```
+
+```r
+shapiro.test(algae$Chla^lambda)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  algae$Chla^lambda
+## W = 0.98577, p-value = 0.05438
+```
+
+---
+
+# 假设检验
+
+- 单样本t检验（检验正态样本均值是否为某个值）
+
+
+```r
+x &lt;- algae$Chla^lambda
+mean(x, na.rm = TRUE)
+```
+
+```
+## [1] 1.017679
+```
+
+```r
+t.test(x, mu = 1.016)
+```
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  x
+## t = 1.5533, df = 187, p-value = 0.122
+## alternative hypothesis: true mean is not equal to 1.016
+## 95 percent confidence interval:
+##  1.015547 1.019812
+## sample estimates:
+## mean of x 
+##  1.017679
+```
+
+---
+
+# 假设检验
+
+- Wilcoxon符号秩检验（检验非正态样本均值是否为某个值）
+
+
+```r
+x &lt;- algae$Chla
+mean(x, na.rm = TRUE)
+```
+
+```
+## [1] 13.9712
+```
+
+```r
+wilcox.test(x, mu = 10, conf.int = TRUE)
+```
+
+```
+## 
+## 	Wilcoxon signed rank test with continuity correction
+## 
+## data:  x
+## V = 8426, p-value = 0.6248
+## alternative hypothesis: true location is not equal to 10
+## 95 percent confidence interval:
+##   7.050062 11.664517
+## sample estimates:
+## (pseudo)median 
+##       9.395488
+```
+
+---
+
+# 假设检验
+
+- 两样本t检验（检验两个正态样本均值是否相等）
+
+
+```r
+x1 &lt;- algae %&gt;% filter(season == "spring") %&gt;% .$Chla
+x2 &lt;- algae %&gt;% filter(season == "autumn") %&gt;% .$Chla
+y1 &lt;- log(x1)
+y2 &lt;- log(x2)
+shapiro.test(y1)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  y1
+## W = 0.96496, p-value = 0.1434
+```
+
+```r
+shapiro.test(y2)
+```
+
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  y2
+## W = 0.97637, p-value = 0.6056
+```
+
+---
+
+# 假设检验
+
+- 两样本t检验（检验两个正态样本均值是否相等）
+
+
+```r
+t.test(y1, y2)
+```
+
+```
+## 
+## 	Welch Two Sample t-test
+## 
+## data:  y1 and y2
+## t = -1.9006, df = 84.996, p-value = 0.06074
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.16535344  0.02626345
+## sample estimates:
+## mean of x mean of y 
+##  1.483856  2.053401
+```
+
+---
+
+# 假设检验
+
+- 两样本Wilcoxon秩和检验（检验两个非正态样本均值是否相等）
+
+
+```r
+wilcox.test(x1, x2) # 原始数据
+```
+
+```
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  x1 and x2
+## W = 712, p-value = 0.06806
+## alternative hypothesis: true location shift is not equal to 0
+```
+
+```r
+wilcox.test(y1, y2) # 变换后数据
+```
+
+```
+## 
+## 	Wilcoxon rank sum test with continuity correction
+## 
+## data:  y1 and y2
+## W = 712, p-value = 0.06806
+## alternative hypothesis: true location shift is not equal to 0
+```
+
+---
+
+# 假设检验
+
+- Kolmogorov-Smirnov检验（KS检验，检验两样本是否具有相同分布）
+
+
+```r
+x1 &lt;- algae %&gt;% filter(season == "spring") %&gt;% .$mxPH
+x2 &lt;- algae %&gt;% filter(season == "autumn") %&gt;% .$mxPH
+ks.test(x1, x2)
+```
+
+```
+## Warning in ks.test(x1, x2): cannot compute exact p-value
+## with ties
+```
+
+```
+## 
+## 	Two-sample Kolmogorov-Smirnov test
+## 
+## data:  x1 and x2
+## D = 0.11321, p-value = 0.932
+## alternative hypothesis: two-sided
+```
+
+---
+
+# 假设检验
+
+- F检验（检验两样本是否具有相同方差）
+
+
+```r
+var.test(y1, y2)
+```
+
+```
+## 
+## 	F test to compare two variances
+## 
+## data:  y1 and y2
+## F = 1.8646, num df = 49, denom df = 36, p-value =
+## 0.05315
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 95 percent confidence interval:
+##  0.9913762 3.4055116
+## sample estimates:
+## ratio of variances 
+##           1.864619
+```
+
+---
+
+# 假设检验
+
+- 卡方检验（检验列联表的独立性）
+
+
+```r
+chisq.test(factor(algae$size), factor(algae$speed))
+```
+
+```
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  factor(algae$size) and factor(algae$speed)
+## X-squared = 36.102, df = 4, p-value = 2.757e-07
+```
+
+```r
+summary(table(algae$size, algae$speed))
+```
+
+```
+## Number of cases in table: 200 
+## Number of factors: 2 
+## Test for independence of all factors:
+## 	Chisq = 36.1, df = 4, p-value = 2.757e-07
+```
+
+如果p值小于0.05，不能拒绝x和y独立的原假设。
+
+---
+
+# 假设检验
+
+- Fisher精确检验（检验列联表的独立性）
+
+
+```r
+fisher.test(factor(algae$size), factor(algae$speed))
+```
+
+```
+## 
+## 	Fisher's Exact Test for Count Data
+## 
+## data:  factor(algae$size) and factor(algae$speed)
+## p-value = 4.275e-08
+## alternative hypothesis: two.sided
+```
+
+```r
+chisq.test(factor(algae$size), factor(algae$speed))
+```
+
+```
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  factor(algae$size) and factor(algae$speed)
+## X-squared = 36.102, df = 4, p-value = 2.757e-07
+```
+
+如果p值小于0.05，不能拒绝x和y独立的原假设。
+
+---
+
+# 假设检验
+
+- 相关性检验（检验两个变量的线性相关程度）
+
+
+```r
+cor(algae$Chla, algae$a1, use = "complete.obs")
+```
+
+```
+## [1] -0.2779866
+```
+
+```r
+cor.test(algae$Chla, algae$a1)
+```
+
+```
+## 
+## 	Pearson's product-moment correlation
+## 
+## data:  algae$Chla and algae$a1
+## t = -3.9468, df = 186, p-value = 0.0001122
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.4049854 -0.1404644
+## sample estimates:
+##        cor 
+## -0.2779866
+```
+
+---
+
+# 多元统计分析
+
+随机变量的协方差：
+
+`$$\text{cov}\left(X,Y\right)=\mathbb{E}\left[\left(X-\mathbb{E}\left(X\right)\right)\left(Y-\mathbb{E}\left(Y\right)\right)\right]$$`
+
+样本的协方差：
+
+`$$\sigma_{xy}=\dfrac{1}{n-1}\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)\left(y_{i}-\bar{y}\right)$$`
+
+
+```r
+# 按照定义式计算
+sum((algae$a1 - mean(algae$a1)) * (algae$a2 - mean(algae$a2))) / 199
+```
+
+```
+## [1] -69.16299
+```
+
+```r
+# 直接用自带函数计算
+cov(algae$a1, algae$a2)
+```
+
+```
+## [1] -69.16299
+```
+
+---
+
+# 多元统计分析
+
+随机变量的相关系数：
+
+`$$\text{cor}\left(X,Y\right)=\dfrac{\text{cov}\left(X,Y\right)}{\sqrt{\text{var}\left(X\right)\text{var}\left(Y\right)}}$$`
+
+样本的相关系数：
+
+`$$\rho_{xy}=\dfrac{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)\left(y_{i}-\bar{y}\right)}{\sqrt{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\sum_{i=1}^{n}\left(y_{i}-\bar{y}\right)^{2}}}=\dfrac{\sigma_{xy}}{\sqrt{\sigma_{xx}\sigma_{yy}}}$$`
+
+
+```r
+# 按照定义式计算
+cov(algae$a1, algae$a2) / (sd(algae$a1) * sd(algae$a2))
+```
+
+```
+## [1] -0.2937678
+```
+
+```r
+# 直接用自带函数计算
+cor(algae$a1, algae$a2)
+```
+
+```
+## [1] -0.2937678
+```
+
+
+---
+
+# 多元统计分析——协方差矩阵
+
+协方差矩阵是多元统计分析的基础，相关系数分析、主成分分析、因子分析、聚类分析、判别分析等都与之相关。其计算公式如下：
+
+`$$\Sigma_{X}=\left[\begin{array}{cccc}
+\sigma_{x_{1}x_{1}} &amp; \sigma_{x_{1}x_{2}} &amp; \cdots &amp; \sigma_{x_{1}x_{n}}\\
+\sigma_{x_{2}x_{1}} &amp; \sigma_{x_{1}x_{1}} &amp; \cdots &amp; \sigma_{x_{2}x_{n}}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+\sigma_{x_{n}x_{1}} &amp; \sigma_{x_{n}x_{2}} &amp; \cdots &amp; \sigma_{x_{n}x_{n}}
+\end{array}\right]$$`
+
+
+```r
+round(cov(algae[, 12:18]), 2) #保留两位小数
+```
+
+```
+##        a1     a2     a3    a4     a5     a6     a7
+## a1 455.75 -69.16 -21.74 -3.58 -46.63 -68.07 -23.45
+## a2 -69.16 121.62   2.46 -8.37 -13.26 -14.97   2.79
+## a3 -21.74   2.46  48.28  0.38  -5.64 -13.92   2.02
+## a4  -3.58  -8.37   0.38 19.51  -3.61  -4.64   0.98
+## a5 -46.63 -13.26  -5.64 -3.61  56.12  35.36  -1.08
+## a6 -68.07 -14.97 -13.92 -4.64  35.36 135.97  -0.81
+## a7 -23.45   2.79   2.02  0.98  -1.08  -0.81  26.61
+```
+
+
+---
+
+# 主成分分析
+
+将一组随机变量 `\(X_1,\cdots,X_n\)`重新进行线性组合得到
+
+`$$\begin{cases}
+Z_{1}=a_{11}X_{1}+a_{21}X_{2}+\cdots+a_{n1}X_{n}\\
+Z_{2}=a_{12}X_{1}+a_{22}X_{2}+\cdots+a_{n2}X_{n}\\
+\cdots\\
+Z_{n}=a_{1n}X_{1}+a_{2n}X_{2}+\cdots+a_{nn}X_{n}
+\end{cases}$$`
+
+要求 `\(Z_1\)`含有原有数据.red[最多的信息]， `\(Z_2\)`次之但与 `\(Z_1\)` .red[不存在信息上的交叉]，  `\(Z_3\)`又次之且与前面的变量都不存在信息上的交叉，依次类推。通过这种方式得到的 `\(Z_1,\cdots,Z_n\)`就是主成分。
+
+--
+
+- 什么叫“最多的信息”？
+
+  ——信息量是以方差为度量的，因此最多的信息是指 `\(\max\{\text{var}(Z_i)\}\)`。
+
+--
+
+- 什么叫“不存在信息上的交叉”?
+
+  ——直观理解就是两个变量不相关，因此可以表示为 `\(\text{cov}(Z_i,Z_j)=0\)`。
+
+---
+
+# 主成分计算
+
+主成分计算主要用到协方差矩阵的特征值和特征向量。第一主成分对应最大特征值及其特征向量。其中，特征值为其方差 `\(\lambda_i\)`，特征向量为其系数 `\(a_{i1}\)`。同样，第二主成分对应第二大的特征值及其特征向量，依次类推。
+
+.scrollbox[
+
+```r
+# 特征值分解求主成分
+eigen(cov(algae[12:18]))
+```
+
+```
+## eigen() decomposition
+## $values
+## [1] 488.89722 157.95930  91.96070  44.63668  38.63368
+## [6]  24.62625  17.16025
+## 
+## $vectors
+##              [,1]        [,2]         [,3]         [,4]
+## [1,]  0.958842101 -0.07317137 -0.224249167  0.043793812
+## [2,] -0.169470105  0.57007876 -0.771800384 -0.004951741
+## [3,] -0.041130250  0.13825892  0.238302434  0.785682610
+## [4,] -0.001706467  0.00100940  0.135612638  0.017281382
+## [5,] -0.112741008 -0.30737428  0.007056712 -0.506580430
+## [6,] -0.187273844 -0.74490034 -0.524208579  0.348911221
+## [7,] -0.049245023  0.03441145  0.063349903  0.045814839
+##            [,5]        [,6]        [,7]
+## [1,] -0.1123687 -0.08102497 -0.06221264
+## [2,] -0.1644451 -0.04659525 -0.14620681
+## [3,] -0.5465966 -0.03267562 -0.07260896
+## [4,]  0.2087944  0.06517799 -0.96615907
+## [5,] -0.7608181 -0.15426332 -0.18301798
+## [6,]  0.1056837 -0.01533012 -0.04598102
+## [7,]  0.1671971 -0.98077306 -0.02019691
+```
+
+```r
+# 通过函数直接求解
+prcomp(algae[12:18])
+```
+
+```
+## Standard deviations (1, .., p=7):
+## [1] 22.111020 12.568186  9.589614  6.681069  6.215600
+## [6]  4.962484  4.142493
+## 
+## Rotation (n x k) = (7 x 7):
+##             PC1         PC2          PC3          PC4
+## a1  0.958842101 -0.07317137  0.224249167 -0.043793812
+## a2 -0.169470105  0.57007876  0.771800384  0.004951741
+## a3 -0.041130250  0.13825892 -0.238302434 -0.785682610
+## a4 -0.001706467  0.00100940 -0.135612638 -0.017281382
+## a5 -0.112741008 -0.30737428 -0.007056712  0.506580430
+## a6 -0.187273844 -0.74490034  0.524208579 -0.348911221
+## a7 -0.049245023  0.03441145 -0.063349903 -0.045814839
+##           PC5         PC6         PC7
+## a1  0.1123687 -0.08102497 -0.06221264
+## a2  0.1644451 -0.04659525 -0.14620681
+## a3  0.5465966 -0.03267562 -0.07260896
+## a4 -0.2087944  0.06517799 -0.96615907
+## a5  0.7608181 -0.15426332 -0.18301798
+## a6 -0.1056837 -0.01533012 -0.04598102
+## a7 -0.1671971 -0.98077306 -0.02019691
+```
+]
+
+---
+
+# 主成分分析几个重要概念
+
+1. 贡献率
+
+  主成分的贡献率为 `\(\lambda_{i}/\sum_{i=1}^{n}\lambda_{i}\)`。
+
+2. 累积贡献率
+
+  前 `\(p\)`个主成分的累计贡献率为 `\(\sum_{i=1}^{p}\lambda_{i}/\sum_{i=1}^{n}\lambda_{i}\)`。
+
+3. 因子负荷量（因子载荷量）
+
+  主成分各个因子负荷量为 `\(\sqrt{\lambda_{i}}a_{ij}/\sigma_{ii}\)`，其含义是主成分 `\(Z_j\)`与原始变量的相关系数 `\(X_i\)`，即 `\(\rho_{Z_jX_i}\)`。当 `\(X_i\)`标准后， `\(\sigma_{ii}=1\)`，因子负荷量简化为 `\(\sqrt{\lambda_{i}}a_{ij}\)`。
+
+4. 主成分得分
+
+  主要针对样本主成分分析而言，就是指将 `\(X_{ij}\)`代入到主成分变换的表达式中，计算出各个 `\(Z_{ij}\)`的结果。
+
+
+---
+
+# 如何理解主成分分析？
+
+两种藻类（`a1`和`a2`）出现频率散点图：
+
+![](data_analysis_files/figure-html/unnamed-chunk-71-1.svg)&lt;!-- --&gt;
+
+---
+
+# 如何理解主成分分析？
+
+第一主成分：
+
+![](data_analysis_files/figure-html/unnamed-chunk-72-1.svg)&lt;!-- --&gt;
+
+---
+
+# 如何理解主成分分析？
+
+第二主成分：
+
+![](data_analysis_files/figure-html/unnamed-chunk-73-1.svg)&lt;!-- --&gt;
+
+---
+
+# 如何理解主成分分析？
+
+回归分析：
+
+![](data_analysis_files/figure-html/unnamed-chunk-74-1.svg)&lt;!-- --&gt;
+
+---
+
+# 如何理解主成分分析？——小结
+
+### 关于主成分分析
+
+- 第一主成分是作一条直线，让所有点到它的.red[垂线]&lt;sup&gt;[1]&lt;/sup&gt;距离的平方和最近。
+
+- 第二主成分垂直于第一主成分，并且也让所有点到它的.red[垂线]距离的平方和最近。
+
+- 第三主成分垂直于第一主成分和第二主成分，并且也让所有点到它的.red[垂线]距离的平方和最近。
+
+- ……
+
+### 关于回归分析
+
+- 回归分析是作一条直线，让所有点到它的.red[竖线]&lt;sup&gt;[2]&lt;/sup&gt;距离的平方和最近。
+
+.footnote[
+[1] 所谓垂线距离，是指线外的点向这条线引垂线，垂足到该点的距离。
+[2] 所谓竖线距离，是指线外的点向竖直方向引一条直线，这条直线与该线的交点到该点的距离。
+]
+
+---
+
+# 主成分作图分析——滚石图
+
+
+```r
+library(factoextra)
+x &lt;- prcomp(algae[12:18], scale. = TRUE)
+fviz_eig(x)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-75-1.svg)&lt;!-- --&gt;
+
+---
+
+# 主成分作图分析——主成分得分
+
+
+```r
+fviz_pca_ind(x, label = FALSE)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-76-1.svg)&lt;!-- --&gt;
+
+---
+
+# 主成分作图分析——变量贡献
+
+
+```r
+fviz_pca_var(x)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-77-1.svg)&lt;!-- --&gt;
+
+---
+
+# 主成分作图分析——联合图
+
+
+```r
+fviz_pca_biplot(x, label = "var")
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-78-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# 因子分析
+
+将一组随机变量 `\(X_1,\cdots,X_n\)`表示成以下的线性组合
+
+`$$\begin{cases}
+X_{1}-\mu_{1}=a_{11}F_{1}+a_{12}F_{2}+\cdots+a_{1m}F_{m}+\varepsilon_{1}\\
+X_{2}-\mu_{2}=a_{21}F_{1}+a_{22}F_{2}+\cdots+a_{2m}F_{m}+\varepsilon_{2}\\
+\cdots\\
+X_{n}-\mu_{n}=a_{n1}F_{1}+a_{n2}F_{2}+\cdots+a_{nm}F_{m}+\varepsilon_{n}
+\end{cases}$$`
+
+其中 `\(\mu_1,\cdots,\mu_n\)`是 `\(X_1,\cdots,X_n\)`的均值。
+
+那么，当 `\(F_i\)`、 `\(\varepsilon_i\)`互不相关（即 `\(\text{cov}\left(F_{i},F_{j}\right)=0\)`、 `\(\text{cov}\left(F_{i},\varepsilon_{j}\right)=0\)`），且 `\(F_i\)`是标准化数据（即 `\(\mathbb{E}\left(F_{i}\right)=0\)`、  `\(\text{var}\left(F_{i}\right)=1\)`），同时 `\(\varepsilon_i\)`也满足 `\(\mathbb{E}\left(\varepsilon_{i}\right)=0\)`且  `\(\text{var}\left(\varepsilon_{i}\right)=\delta_i^2\)`，这样构成的模型就是.red[正交因子模型]，其中 `\(F_1,\cdots,F_n\)`为.red[公共因子]， `\(\varepsilon_1,\cdots,\varepsilon_n\)`为.red[特殊因子]。
+
+系数 `\(a_{ij}\)`为第 `\(i\)`个变量在 第 `\(j\)`个因子上的载荷（简称.red[因子载荷]），由 `\(a_{ij}\)`构成的矩阵称为.red[因子载荷矩阵]。因子载荷实际上是因子 `\(F_j\)`与原始变量 `\(X_i\)`的协方差，即 `\(\text{cov}\left(X_{i},F_{j}\right)=a_{ij}\)`。当变量 `\(X_i\)`是标准化变量时，因子载荷即为它们的相关系数。
+
+
+---
+
+# 因子分析相关概念
+
+1. 共同度
+
+  因子载荷矩阵中各.red[行]元素的平方和 `\(h_{i}^{2}=\sum_{j=1}^{m}a_{ij}^{2}\)`即为变量 `\(X_i\)`的共同度。共同度满足以下关系：
+  `$$\sigma_i^2=h_i^2+\delta_i^2$$`
+  其中， `\(\sigma_i^2\)`为变量的方差。上式表明， `\(h_i^2\)`是全部公共因子对变量 `\(X_i\)`的方差做出的贡献，称为.red[公因子方差]； `\(\delta_i^2\)`是特定因子对变量 `\(X_i\)`的方差的影响，
+称为.red[剩余方差]，表征的是公共因子不能解释的那部分信息。
+
+2. 公共因子的方差贡献
+
+  因子载荷矩阵中各.red[列]元素的平方和 `\(q_{j}^{2}=\sum_{i=1}^{n}a_{ij}^{2}\)`即为公共因子 `\(F_j\)`对所有变量 `\(X_1,\cdots,X_n\)`的总影响，称为.red[贡献]，表征公共因子 `\(F_j\)`的重要性。通过对 `\(q_j^2\)`按从大到小的顺序排序，就能识别出最有影响的公共因子。
+
+---
+
+# 参数估计方法——求 `\(a_{ij}\)`和 `\(\delta_i^2\)`
+
+- 主成分法
+
+  类比主成分分析的求解方法及主成分中因子负荷量的计算，假设协方差矩阵的特征值和特征向量分别为 `\(\lambda_j\)`及 `\(l_j=(l_{1j},\cdots,l_{nj})^\top\)`，那么可以选择前 `\(m\)`个主成分来对参数估值
+  
+`$$\begin{cases}
+a_{ij}=\sqrt{\lambda_{j}}l_{ij}\\
+\delta_{i}^{2}=\sigma_{i}^{2}-\sum_{j=1}^{m}a_{ij}^{2}
+\end{cases}$$`
+
+- 主因子解
+
+  主因子解是采用迭代算法对主成分法的修正。先假设初始的 `\(\delta_i^2\)`的值，然后在协方差矩阵中扣除掉这部分剩余方差，再对剩下的矩阵进行特征值和特征向量求解，得到新的参数 `\(a_{ij}\)`和 `\(\delta_i^2\)`的估计，然后用新的 `\(\delta_i^2\)`重复上述工作，直到解稳定为止。
+
+- 极大似然法
+
+  该方法需要假设公共因子和特殊因子服从多元正态分布，通过构建似然函数并求其最大值（也是采用迭代算法）对参数 `\(a_{ij}\)`和 `\(\delta_i^2\)`进行估计。
+
+---
+
+# 因子分析的应用
+
+.content-box-yellow[问题：如何识别水质数据主要受哪些因子的影响？]
+
+
+```r
+factanal(na.omit(algae[4:11]), factors = 3, rotation = "none")
+```
+
+.scrollbox[
+
+```
+## 
+## Call:
+## factanal(x = na.omit(algae[4:11]), factors = 3, rotation = "none")
+## 
+## Uniquenesses:
+##  mxPH  mnO2    Cl   NO3   NH4  oPO4   PO4  Chla 
+## 0.755 0.746 0.781 0.005 0.464 0.149 0.005 0.005 
+## 
+## Loadings:
+##      Factor1 Factor2 Factor3
+## mxPH  0.202  -0.364  -0.268 
+## mnO2 -0.272   0.328  -0.270 
+## Cl    0.405           0.234 
+## NO3   0.577   0.813         
+## NH4   0.460   0.566         
+## oPO4  0.611  -0.250   0.645 
+## PO4   0.738  -0.312   0.594 
+## Chla  0.699  -0.337  -0.627 
+## 
+##                Factor1 Factor2 Factor3
+## SS loadings      2.230   1.495   1.366
+## Proportion Var   0.279   0.187   0.171
+## Cumulative Var   0.279   0.466   0.636
+## 
+## Test of the hypothesis that 3 factors are sufficient.
+## The chi square statistic is 36.06 on 7 degrees of freedom.
+## The p-value is 7.06e-06
+```
+]
+
+---
+
+# 因子分析的应用
+
+
+```r
+library(psych)
+fa(na.omit(algae[4:11]), nfactors = 3, rotate = "none")
+```
+
+.scrollbox[
+
+```
+## 
+## Attaching package: 'psych'
+```
+
+```
+## The following objects are masked from 'package:ggplot2':
+## 
+##     %+%, alpha
+```
+
+```
+## The estimated weights for the factor scores are probably incorrect.  Try a different factor extraction method.
+```
+
+```
+## Warning in fac(r = r, nfactors = nfactors, n.obs = n.obs,
+## rotate = rotate, : An ultra-Heywood case was detected.
+## Examine the results carefully
+```
+
+```
+## Factor Analysis using method =  minres
+## Call: fa(r = na.omit(algae[4:11]), nfactors = 3, rotate = "none")
+## Standardized loadings (pattern matrix) based upon correlation matrix
+##        MR1   MR2   MR3   h2      u2 com
+## mxPH  0.15 -0.38  0.61 0.54  0.4602 1.8
+## mnO2 -0.42  0.25  0.06 0.24  0.7559 1.7
+## Cl    0.46 -0.06  0.06 0.22  0.7778 1.1
+## NO3   0.41  0.90  0.19 1.02 -0.0173 1.5
+## NH4   0.38  0.61  0.04 0.52  0.4843 1.7
+## oPO4  0.85 -0.19 -0.23 0.81  0.1929 1.3
+## PO4   0.96 -0.23 -0.17 1.00 -0.0029 1.2
+## Chla  0.30 -0.09  0.57 0.43  0.5731 1.6
+## 
+##                        MR1  MR2  MR3
+## SS loadings           2.46 1.49 0.83
+## Proportion Var        0.31 0.19 0.10
+## Cumulative Var        0.31 0.49 0.60
+## Proportion Explained  0.52 0.31 0.17
+## Cumulative Proportion 0.52 0.83 1.00
+## 
+## Mean item complexity =  1.5
+## Test of the hypothesis that 3 factors are sufficient.
+## 
+## The degrees of freedom for the null model are  28  and the objective function was  3.76 with Chi Square of  675.27
+## The degrees of freedom for the model are 7  and the objective function was  0.28 
+## 
+## The root mean square of the residuals (RMSR) is  0.03 
+## The df corrected root mean square of the residuals is  0.07 
+## 
+## The harmonic number of observations is  184 with the empirical chi square  10.92  with prob &lt;  0.14 
+## The total number of observations was  184  with Likelihood Chi Square =  50.26  with prob &lt;  1.3e-08 
+## 
+## Tucker Lewis Index of factoring reliability =  0.729
+## RMSEA index =  0.187  and the 90 % confidence intervals are  0.138 0.233
+## BIC =  13.76
+## Fit based upon off diagonal values = 0.99
+```
+]
+
+---
+
+# 因子数目
+
+
+```r
+library(nFactors)
+mydata &lt;- na.omit(algae[4:11])
+ev &lt;- eigen(cor(mydata)) # 特征值分解
+ap &lt;- parallel(subject = nrow(mydata), var = ncol(mydata), rep = 100, cent = .05)
+nS &lt;- nScree(x = ev$values, aparallel = ap$eigen$qevpea)
+plotnScree(nS)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-83-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# 方差最大的正交旋转
+
+.content-box-yellow[原理：正交因子模型解不唯一，对因子作正交旋转得到的结果仍然是它的解。]
+
+
+```r
+factanal(na.omit(algae[4:11]), factors = 3, rotation = "varimax")
+```
+
+.scrollbox[
+
+```
+## 
+## Call:
+## factanal(x = na.omit(algae[4:11]), factors = 3, rotation = "varimax")
+## 
+## Uniquenesses:
+##  mxPH  mnO2    Cl   NO3   NH4  oPO4   PO4  Chla 
+## 0.755 0.746 0.781 0.005 0.464 0.149 0.005 0.005 
+## 
+## Loadings:
+##      Factor1 Factor2 Factor3
+## mxPH         -0.160   0.463 
+## mnO2 -0.476   0.130  -0.103 
+## Cl    0.419   0.199         
+## NO3           0.996         
+## NH4   0.115   0.722         
+## oPO4  0.917   0.103         
+## PO4   0.982   0.129   0.120 
+## Chla  0.111   0.174   0.976 
+## 
+##                Factor1 Factor2 Factor3
+## SS loadings      2.238   1.653   1.199
+## Proportion Var   0.280   0.207   0.150
+## Cumulative Var   0.280   0.486   0.636
+## 
+## Test of the hypothesis that 3 factors are sufficient.
+## The chi square statistic is 36.06 on 7 degrees of freedom.
+## The p-value is 7.06e-06
+```
+]
+
+---
+
+# 因子载荷图
+
+![](data_analysis_files/figure-html/unnamed-chunk-86-1.svg)&lt;!-- --&gt;
+
+
+```r
+x &lt;- factanal(na.omit(algae[4:11]), factors = 3)
+x$loadings[, 1:2] %&gt;% as.data.frame() %&gt;% mutate(Variable = rownames(.)) %&gt;%
+  ggplot(aes(0, 0)) + geom_hline(yintercept = 0, linetype = 2) + geom_vline(xintercept = 0, linetype = 2) +
+  geom_segment(aes(xend = Factor1, yend = Factor2), arrow = arrow(length = unit(0.3, "cm"))) +
+  geom_text(aes(Factor1, Factor2, label = Variable), nudge_x = 0.05) + xlab("Factor 1") + ylab("Factor 2")
+```
+
+---
+
+# 因子得分图——巴特莱因子得分
+
+
+```r
+x &lt;- factanal(na.omit(algae[4:11]), factors = 3, scores = "Bartlett")
+x$scores %&gt;% as.data.frame() %&gt;% ggplot() + geom_point(aes(Factor1, Factor2)) +
+  geom_hline(yintercept = 0, linetype = 2) + geom_vline(xintercept = 0, linetype = 2)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-88-1.svg)&lt;!-- --&gt;
+
+---
+
+# 因子得分图——汤普森因子得分
+
+
+```r
+x &lt;- factanal(na.omit(algae[4:11]), factors = 3, scores = "regression")
+x$scores %&gt;% as.data.frame() %&gt;% ggplot() + geom_point(aes(Factor1, Factor2)) +
+  geom_hline(yintercept = 0, linetype = 2) + geom_vline(xintercept = 0, linetype = 2)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-89-1.svg)&lt;!-- --&gt;
+
+---
+
+# 因子载荷-因子得分联合图
+
+![](data_analysis_files/figure-html/unnamed-chunk-90-1.svg)&lt;!-- --&gt;
+
+---
+
+# 聚类分析
+
+.content-box-yellow[如何测度距离？——关于样本的距离]
+
+.pull-left[
+&lt;img src="https://bookdown.org/rdpeng/exdata/images/distance.png" height="200"&gt;
+&lt;img src="https://bookdown.org/rdpeng/exdata/images/manhattan.png" height="200"&gt;
+]
+
+.pull-right[
+
+- 欧氏距离
+
+  ——测量两点之间的直线距离。
+
+`$$d_{euc}\left(x,y\right)=\sqrt{\sum_{i=1}^{n}\left(x_{i}-y_{i}\right)^{2}}$$`
+
+- 曼哈顿距离
+
+  ——测量两点之间的折线距离。
+  
+`$$d_{man}\left(x,y\right)=\sum_{i=1}^{n}\left|x_{i}-y_{i}\right|$$`
+
+- ……
+
+]
+
+---
+
+# 聚类分析
+
+.content-box-yellow[如何测度距离？——关于变量的距离]
+
+- 相关系数距离
+
+`$$d_{cor}\left(x,y\right)=1-\dfrac{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)\left(y_{i}-\bar{y}\right)}{\sqrt{\sum_{i=1}^{n}\left(x_{i}-\bar{x}\right)^{2}\sum_{i=1}^{n}\left(y_{i}-\bar{y}\right)^{2}}}$$`
+
+- 夹角余弦距离
+
+`$$d_{eisen}\left(x,y\right)=1-\dfrac{\left|\sum_{i=1}^{n}x_{i}y_{i}\right|}{\sqrt{\sum_{i=1}^{n}x_{i}^{2}\sum_{i=1}^{n}y_{i}^{2}}}$$`
+
+- 秩相关系数距离
+
+`$$d_{spear}\left(x,y\right)=1-\dfrac{\sum_{i=1}^{n}\left(x_{i}^{\prime}-\bar{x^{\prime}}\right)\left(y_{i}^{\prime}-\bar{y^{\prime}}\right)}{\sqrt{\sum_{i=1}^{n}\left(x_{i}^{\prime}-\bar{x^{\prime}}\right)^{2}\sum_{i=1}^{n}\left(y_{i}^{\prime}-\bar{y^{\prime}}\right)^{2}}}$$`
+
+这里， `\(x_{i}^{\prime}=\text{rank}\left(x_{i}\right)\)`， `\(y_{i}^{\prime}=\text{rank}\left(y_{i}\right)\)`。
+
+- ……
+
+---
+
+# 聚类分析——距离计算
+
+- 第一步：数据标准化
+
+  ——让不同量纲的数据可以公度。
+
+`$$\tilde{x}_{i}=\dfrac{x_{i}-\bar{x}}{s}$$`
+
+
+```r
+x &lt;- scale(algae[4:18])
+x[1:3, 9:15] %&gt;% print(digits = 1) # 标准化后的数据
+```
+
+```
+##        a1    a2    a3    a4   a5   a6    a7
+## [1,] -0.8 -0.68 -0.62 -0.45  3.9  0.2 -0.48
+## [2,] -0.7  0.01  0.07 -0.02  0.2 -0.5 -0.08
+## [3,] -0.6  4.18 -0.35 -0.45 -0.7 -0.5  1.40
+```
+
+```r
+as.matrix(algae[4:18])[1:3, 9:15] # 原始数据
+```
+
+```
+##       a1   a2  a3  a4   a5  a6  a7
+## [1,] 0.0  0.0 0.0 0.0 34.2 8.3 0.0
+## [2,] 1.4  7.6 4.8 1.9  6.7 0.0 2.1
+## [3,] 3.3 53.6 1.9 0.0  0.0 0.0 9.7
+```
+
+---
+
+# 聚类分析——距离计算
+
+- 第二步：选择距离公式进行计算
+  
+  在R中常用的距离算法有：
+  
+  1. `dist()`函数（R自带的`stats`包）：仅支持数值型距离。
+    
+  2. `get_dist()`函数（`factoextra`包）：仅支持数值型距离，但比`dist()`函数支持更多的距离公式，包括“pearson”、“kendall”和“spearman”等。
+  
+  3. `daisy()`函数（`cluster`包）：除了支持数值型变量外，还支持非数值型变量，包括名义变量、顺序变量、二分类变量等。
+  
+
+```r
+dist.euc &lt;- dist(x[1:9, ], method = "euclidean")
+library("factoextra")
+dist.cor &lt;- get_dist(t(x[, 9:15]), method = "pearson")
+```
+  
+---
+
+# 聚类分析——距离可视化
+
+
+```r
+library(factoextra)
+fviz_dist(dist.euc)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-93-1.svg)&lt;!-- --&gt;
+
+---
+
+# K均值聚类
+
+原理：将原来的样本分为K类，使得每类各个样本到其均值的距离的平方和最小。
+
+`$$W=\sum_{k=1}^{K}W\left(C_{k}\right)=\sum_{k=1}^{K}\sum_{x_{i}\in C_{k}}\left(x_{i}-\mu_{k}\right)^{2}$$`
+
+计算步骤：
+
+1. 选择样本类别数K
+
+2. 随机从样本中选择K个点作为类中心的初始值
+
+3. 通过欧氏距离计算各个样本点到K个类中心的距离，将每个样本点标记为K个类中心中距离最近的类
+
+4. 计算各个类中新的类中心与每类各个样本到其均值的距离的平方和，并重复以上步骤，直到每类各个样本到其均值的距离的平方和不发生变化。
+
+---
+
+# K均值聚类
+
+.content-box-yellow[问题：如何根据观测数据对各个观测样本进行分类？]
+
+
+```r
+set.seed(1)
+(km.res &lt;- kmeans(x[, 9:15], 8, nstart = 25))
+```
+
+.scrollbox[
+
+```
+## K-means clustering with 8 clusters of sizes 25, 78, 23, 10, 8, 36, 18, 2
+## 
+## Cluster means:
+##           a1          a2         a3          a4          a5
+## 1 -0.5103667  2.09476581 -0.1061374 -0.32971852 -0.51318836
+## 2 -0.3214879 -0.20153808 -0.2382737  0.10588943 -0.25299261
+## 3 -0.5477262 -0.23830406 -0.4600186 -0.29554539  2.15735162
+## 4 -0.6667252 -0.53122895 -0.3280547 -0.19977795  0.60008799
+## 5 -0.5403690 -0.45415382  0.3997964 -0.01811018  0.03644178
+## 6  1.8302901 -0.55666877 -0.3151822 -0.21021646 -0.51659968
+## 7 -0.2818924 -0.04610906  2.4715753  0.04320033 -0.18881647
+## 8  0.3033720 -0.67631153 -0.6202025  7.85698962 -0.67604173
+##           a6          a7
+## 1 -0.3351425  0.14199688
+## 2 -0.2507786 -0.09456269
+## 3  0.7107778 -0.31687702
+## 4  3.5054468 -0.22593496
+## 5  0.1531639  4.12750516
+## 6 -0.4485719 -0.42129510
+## 7 -0.4176037 -0.21021138
+## 8 -0.5114611 -0.34806197
+## 
+## Clustering vector:
+##   [1] 3 2 1 1 2 3 2 2 2 2 2 6 6 2 6 6 6 2 6 8 2 2 3 6 2 2 2
+##  [28] 2 7 7 3 7 4 2 1 2 6 6 1 2 2 3 1 3 6 2 6 6 6 2 2 6 6 6
+##  [55] 2 6 2 8 6 6 6 2 2 2 2 6 7 6 2 2 2 3 3 7 7 2 6 7 2 2 2
+##  [82] 5 5 5 5 5 5 2 3 2 3 3 2 2 3 2 1 2 7 4 7 7 6 4 1 2 1 2
+## [109] 2 1 6 6 2 2 3 6 6 6 7 7 3 2 3 3 2 3 1 1 1 3 5 3 4 2 3
+## [136] 1 1 2 2 3 2 7 6 2 5 2 6 1 2 7 2 4 4 7 3 2 2 1 2 1 1 1
+## [163] 1 1 2 4 2 2 2 4 2 2 4 7 3 1 6 7 6 6 6 6 7 1 2 2 2 2 2
+## [190] 2 4 2 2 1 2 1 2 2 2 2
+## 
+## Within cluster sum of squares by cluster:
+## [1]  64.345715 138.202060  55.941814  23.355454  34.511742
+## [6]  49.749583  45.062142   8.836317
+##  (between_SS / total_SS =  69.8 %)
+## 
+## Available components:
+## 
+## [1] "cluster"      "centers"      "totss"       
+## [4] "withinss"     "tot.withinss" "betweenss"   
+## [7] "size"         "iter"         "ifault"
+```
+]
+
+---
+
+# 确定类的数目
+
+
+```r
+library(factoextra)
+fviz_nbclust(x[, 9:15], kmeans, method = "wss") +
+  geom_vline(xintercept = 8, linetype = 2)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-96-1.svg)&lt;!-- --&gt;
+
+---
+
+# 原始数据的分类情况
+
+- 类中心
+
+
+```r
+aggregate(algae[, 12:18],
+          by = list(cluster = km.res$cluster),
+          mean) %&gt;%
+  print(digits = 2)
+```
+
+```
+##   cluster   a1   a2   a3    a4   a5    a6    a7
+## 1       1  6.0 30.6  3.6  0.54  1.2  2.06  3.23
+## 2       2 10.1  5.2  2.7  2.46  3.2  3.04  2.01
+## 3       3  5.2  4.8  1.1  0.69 21.2 14.25  0.86
+## 4       4  2.7  1.6  2.0  1.11  9.6 46.84  1.33
+## 5       5  5.4  2.4  7.1  1.91  5.3  7.75 23.79
+## 6       6 56.0  1.3  2.1  1.06  1.2  0.73  0.32
+## 7       7 10.9  7.0 21.5  2.18  3.6  1.09  1.41
+## 8       8 23.4  0.0  0.0 36.70  0.0  0.00  0.70
+```
+
+---
+
+# 原始数据的分类情况
+
+- 分类情况
+
+
+```r
+dd &lt;- cbind(algae[, 12:18], cluster = km.res$cluster)
+head(dd, 10)
+```
+
+```
+##      a1   a2   a3  a4   a5   a6  a7 cluster
+## 1   0.0  0.0  0.0 0.0 34.2  8.3 0.0       3
+## 2   1.4  7.6  4.8 1.9  6.7  0.0 2.1       2
+## 3   3.3 53.6  1.9 0.0  0.0  0.0 9.7       1
+## 4   3.1 41.0 18.9 0.0  1.4  0.0 1.4       1
+## 5   9.2  2.9  7.5 0.0  7.5  4.1 1.0       2
+## 6  15.1 14.6  1.4 0.0 22.5 12.6 2.9       3
+## 7   2.4  1.2  3.2 3.9  5.8  6.8 0.0       2
+## 8  18.2  1.6  0.0 0.0  5.5  8.7 0.0       2
+## 9  25.4  5.4  2.5 0.0  0.0  0.0 0.0       2
+## 10 17.0  0.0  0.0 2.9  0.0  0.0 1.7       2
+```
+
+---
+
+# K均值聚类可视化
+
+
+```r
+fviz_cluster(km.res, data = x[, 9:15], ellipse.type = "euclid", star.plot = TRUE, repel = TRUE, ggtheme = theme_minimal())
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-99-1.svg)&lt;!-- --&gt;
+
+---
+
+# 层次聚类
+
+.content-box-yellow[
+层次聚类基本步骤为：
+
+1. 把每个样本归为一类，计算每两个类之间的距离
+
+2. 寻找各个类之间最近的两个类，把他们归为一类
+
+3. 重新计算新生成的这个类与各个旧类之间的距离
+
+4. 重复2和3直到所有样本点都归为一类，结束
+]
+
+类与类之间的距离通过linkage函数计算，主要包括：
+
+.pull-left[
+- 最大距离法： `\(\max\left\{d\left(x,y\right):x\in X,y\in Y\right\}\)`
+- 最小距离法： `\(\min\left\{d\left(x,y\right):x\in X,y\in Y\right\}\)`
+]
+
+.pull-right[
+- 平均距离法： `\(\dfrac{1}{\left|X\right|\left|Y\right|}\sum_{x\in X}\sum_{y\in Y}d\left(x,y\right)\)`
+- Wald方法：选择使离差平方和增加最小的距离
+]
+
+
+---
+
+# 层次聚类——树形图
+
+
+```r
+res.dist &lt;- get_dist(t(x[, 9:15]), method = "pearson")
+res.hc &lt;- hclust(d = res.dist, method = "ward.D2")
+library(factoextra)
+fviz_dend(res.hc)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-100-1.svg)&lt;!-- --&gt;
+
+
+---
+
+# 层次聚类——分类树形图
+
+
+```r
+grp &lt;- cutree(res.hc, k = 3)
+library(factoextra)
+fviz_dend(res.hc, k = 3, color_labels_by_k = TRUE, rect = TRUE)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-101-1.svg)&lt;!-- --&gt;
+
+
+---
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
