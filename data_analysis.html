@@ -135,8 +135,8 @@ library(leafletCN)
 leaflet() %&gt;% amap() %&gt;% addMarkers(118.953301, 32.117207)
 ```
 
-<div id="htmlwidget-987134556832a20caa89" style="width:100%;height:432px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-987134556832a20caa89">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",{"minZoom":3,"maxZoom":17,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false},null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://amap.com\">amp.com<\/a >"}]},{"method":"addMarkers","args":[32.117207,118.953301,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[32.117207,32.117207],"lng":[118.953301,118.953301]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5f228843433275adac9b" style="width:100%;height:432px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5f228843433275adac9b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["http://webrd02.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",{"minZoom":3,"maxZoom":17,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false},null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://amap.com\">amp.com<\/a >"}]},{"method":"addMarkers","args":[32.117207,118.953301,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[32.117207,32.117207],"lng":[118.953301,118.953301]}},"evals":[],"jsHooks":[]}</script>
 
 ---
 
@@ -633,7 +633,7 @@ write.csv(iris, file = "iris.csv", row.names = FALSE, na = "")
 
 
 ```r
-x &lt;- read.csv("iris.csv", as.is = TRUE)
+x &lt;- read.csv("iris.csv")
 str(x)
 ```
 
@@ -785,15 +785,15 @@ class: inverse, center, middle
 
 
 ```r
-algae &lt;- read.csv("data/analysis.csv", as.is = TRUE)
+algae &lt;- read.csv("data/analysis.csv")
 str(algae)
 ```
 
 ```
 ## 'data.frame':	200 obs. of  18 variables:
-##  $ season: chr  "winter" "spring" "autumn" "spring" ...
-##  $ size  : chr  "small" "small" "small" "small" ...
-##  $ speed : chr  "medium" "medium" "medium" "medium" ...
+##  $ season: Factor w/ 4 levels "autumn","spring",..: 4 2 1 2 1 4 3 1 4 4 ...
+##  $ size  : Factor w/ 3 levels "large","medium",..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ speed : Factor w/ 3 levels "high","low","medium": 3 3 3 3 3 1 1 1 3 1 ...
 ##  $ mxPH  : num  8 8.35 8.1 8.07 8.06 8.25 8.15 8.05 8.7 7.93 ...
 ##  $ mnO2  : num  9.8 8 11.4 4.8 9 13.1 10.3 10.6 3.4 9.9 ...
 ##  $ Cl    : num  60.8 57.8 40 77.4 55.4 ...
@@ -823,53 +823,53 @@ summary(algae)
 .scrollbox[
 
 ```
-##     season              size              speed          
-##  Length:200         Length:200         Length:200        
-##  Class :character   Class :character   Class :character  
-##  Mode  :character   Mode  :character   Mode  :character  
-##                                                          
-##                                                          
-##                                                          
-##                                                          
-##       mxPH            mnO2              Cl         
-##  Min.   :5.600   Min.   : 1.500   Min.   :  0.222  
-##  1st Qu.:7.700   1st Qu.: 7.725   1st Qu.: 10.981  
-##  Median :8.060   Median : 9.800   Median : 32.730  
-##  Mean   :8.012   Mean   : 9.118   Mean   : 43.636  
-##  3rd Qu.:8.400   3rd Qu.:10.800   3rd Qu.: 57.824  
-##  Max.   :9.700   Max.   :13.400   Max.   :391.500  
-##  NA's   :1       NA's   :2        NA's   :10       
-##       NO3              NH4                oPO4       
-##  Min.   : 0.050   Min.   :    5.00   Min.   :  1.00  
-##  1st Qu.: 1.296   1st Qu.:   38.33   1st Qu.: 15.70  
-##  Median : 2.675   Median :  103.17   Median : 40.15  
-##  Mean   : 3.282   Mean   :  501.30   Mean   : 73.59  
-##  3rd Qu.: 4.446   3rd Qu.:  226.95   3rd Qu.: 99.33  
-##  Max.   :45.650   Max.   :24064.00   Max.   :564.60  
-##  NA's   :2        NA's   :2          NA's   :2       
-##       PO4              Chla               a1       
-##  Min.   :  1.00   Min.   :  0.200   Min.   : 0.00  
-##  1st Qu.: 41.38   1st Qu.:  2.000   1st Qu.: 1.50  
-##  Median :103.29   Median :  5.475   Median : 6.95  
-##  Mean   :137.88   Mean   : 13.971   Mean   :16.92  
-##  3rd Qu.:213.75   3rd Qu.: 18.308   3rd Qu.:24.80  
-##  Max.   :771.60   Max.   :110.456   Max.   :89.80  
-##  NA's   :2        NA's   :12                       
-##        a2               a3               a4        
+##     season       size       speed         mxPH      
+##  autumn:40   large :45   high  :84   Min.   :5.600  
+##  spring:53   medium:84   low   :33   1st Qu.:7.700  
+##  summer:45   small :71   medium:83   Median :8.060  
+##  winter:62                           Mean   :8.012  
+##                                      3rd Qu.:8.400  
+##                                      Max.   :9.700  
+##                                      NA's   :1      
+##       mnO2              Cl               NO3        
+##  Min.   : 1.500   Min.   :  0.222   Min.   : 0.050  
+##  1st Qu.: 7.725   1st Qu.: 10.981   1st Qu.: 1.296  
+##  Median : 9.800   Median : 32.730   Median : 2.675  
+##  Mean   : 9.118   Mean   : 43.636   Mean   : 3.282  
+##  3rd Qu.:10.800   3rd Qu.: 57.824   3rd Qu.: 4.446  
+##  Max.   :13.400   Max.   :391.500   Max.   :45.650  
+##  NA's   :2        NA's   :10        NA's   :2       
+##       NH4                oPO4             PO4        
+##  Min.   :    5.00   Min.   :  1.00   Min.   :  1.00  
+##  1st Qu.:   38.33   1st Qu.: 15.70   1st Qu.: 41.38  
+##  Median :  103.17   Median : 40.15   Median :103.29  
+##  Mean   :  501.30   Mean   : 73.59   Mean   :137.88  
+##  3rd Qu.:  226.95   3rd Qu.: 99.33   3rd Qu.:213.75  
+##  Max.   :24064.00   Max.   :564.60   Max.   :771.60  
+##  NA's   :2          NA's   :2        NA's   :2       
+##       Chla               a1              a2        
+##  Min.   :  0.200   Min.   : 0.00   Min.   : 0.000  
+##  1st Qu.:  2.000   1st Qu.: 1.50   1st Qu.: 0.000  
+##  Median :  5.475   Median : 6.95   Median : 3.000  
+##  Mean   : 13.971   Mean   :16.92   Mean   : 7.458  
+##  3rd Qu.: 18.308   3rd Qu.:24.80   3rd Qu.:11.375  
+##  Max.   :110.456   Max.   :89.80   Max.   :72.600  
+##  NA's   :12                                        
+##        a3               a4               a5        
 ##  Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
 ##  1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.000  
-##  Median : 3.000   Median : 1.550   Median : 0.000  
-##  Mean   : 7.458   Mean   : 4.309   Mean   : 1.992  
-##  3rd Qu.:11.375   3rd Qu.: 4.925   3rd Qu.: 2.400  
-##  Max.   :72.600   Max.   :42.800   Max.   :44.600  
+##  Median : 1.550   Median : 0.000   Median : 1.900  
+##  Mean   : 4.309   Mean   : 1.992   Mean   : 5.064  
+##  3rd Qu.: 4.925   3rd Qu.: 2.400   3rd Qu.: 7.500  
+##  Max.   :42.800   Max.   :44.600   Max.   :44.400  
 ##                                                    
-##        a5               a6               a7        
-##  Min.   : 0.000   Min.   : 0.000   Min.   : 0.000  
-##  1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.000  
-##  Median : 1.900   Median : 0.000   Median : 1.000  
-##  Mean   : 5.064   Mean   : 5.964   Mean   : 2.495  
-##  3rd Qu.: 7.500   3rd Qu.: 6.925   3rd Qu.: 2.400  
-##  Max.   :44.400   Max.   :77.600   Max.   :31.600  
+##        a6               a7        
+##  Min.   : 0.000   Min.   : 0.000  
+##  1st Qu.: 0.000   1st Qu.: 0.000  
+##  Median : 0.000   Median : 1.000  
+##  Mean   : 5.964   Mean   : 2.495  
+##  3rd Qu.: 6.925   3rd Qu.: 2.400  
+##  Max.   :77.600   Max.   :31.600  
 ## 
 ```
 ]
@@ -2842,6 +2842,710 @@ fviz_dend(res.hc, k = 3, color_labels_by_k = TRUE, rect = TRUE)
 
 
 ---
+
+# 多元回归分析
+
+建立响应变量 `\(Y_t\)`和解释变量 `\(X_{t1},\cdots,X_{tm}\)`之间的线性关系：
+
+`$$Y_t=\beta_{0}+\beta_{1}X_{t1}+\cdots+\beta_{m}X_{tm}+\varepsilon_t$$`
+
+要求 `\(\varepsilon_t\sim\mathcal{N}(0,\sigma^2)\)`且相互独立（所谓“独立同分布”，这里 `\(t=1,\cdots,n\)`）。
+
+记 `\(\hat{Y}_t=\beta_{0}+\beta_{1}X_{t1}+\cdots+\beta_{m}X_{tm}\)`， `\(\bar{Y}=\dfrac{1}{n}\sum_{t=1}^{n}Y_{t}\)`，那么有
+
+`$$\sum_{t=1}^{n}\left(Y_{t}-\bar{Y}\right)^{2}=\sum_{t=1}^{n}\left(\hat{Y}_{t}-\bar{Y}\right)^{2}+\sum_{t=1}^{n}\left(Y_{t}-\hat{Y}_{t}\right)^{2}$$`
+
+即TSS（总偏差平方和，自由度 `\(n-1\)`）=MSS（回归平方和，自由度 `\(m\)`）+ESS（残差平方和，自由度 `\(n-m-1\)`）。
+
+决定系数的定义：
+
+`$$R^2=\dfrac{MSS}{TSS}=1-\dfrac{ESS}{TSS}=\rho^2_{Y_t\hat{Y}_{t}}$$`
+
+
+---
+
+# 多元回归分析
+
+
+```r
+clean.algae &lt;- algae[-DMwR2::manyNAs(algae), ] %&gt;%
+  DMwR2::knnImputation(k = 10)
+lm.a1 &lt;- lm(a1 ~ ., data = clean.algae[, 1:12])
+summary(lm.a1)
+anova(lm.a1)
+```
+
+.scrollbox[
+
+```
+## 
+## Call:
+## lm(formula = a1 ~ ., data = clean.algae[, 1:12])
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -37.679 -11.893  -2.567   7.410  62.190 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)  42.942055  24.010879   1.788  0.07537 . 
+## seasonspring  3.726978   4.137741   0.901  0.36892   
+## seasonsummer  0.747597   4.020711   0.186  0.85270   
+## seasonwinter  3.692955   3.865391   0.955  0.34065   
+## sizemedium    3.263728   3.802051   0.858  0.39179   
+## sizesmall     9.682140   4.179971   2.316  0.02166 * 
+## speedlow      3.922084   4.706315   0.833  0.40573   
+## speedmedium   0.246764   3.241874   0.076  0.93941   
+## mxPH         -3.589118   2.703528  -1.328  0.18598   
+## mnO2          1.052636   0.705018   1.493  0.13715   
+## Cl           -0.040172   0.033661  -1.193  0.23426   
+## NO3          -1.511235   0.551339  -2.741  0.00674 **
+## NH4           0.001634   0.001003   1.628  0.10516   
+## oPO4         -0.005435   0.039884  -0.136  0.89177   
+## PO4          -0.052241   0.030755  -1.699  0.09109 . 
+## Chla         -0.088022   0.079998  -1.100  0.27265   
+## ---
+## Signif. codes:  
+## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 17.65 on 182 degrees of freedom
+## Multiple R-squared:  0.3731,	Adjusted R-squared:  0.3215 
+## F-statistic: 7.223 on 15 and 182 DF,  p-value: 2.444e-12
+```
+
+```
+## Analysis of Variance Table
+## 
+## Response: a1
+##            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## season      3     85    28.2  0.0905 0.9651944    
+## size        2  11401  5700.7 18.3088  5.69e-08 ***
+## speed       2   3934  1967.2  6.3179 0.0022244 ** 
+## mxPH        1   1329  1328.8  4.2677 0.0402613 *  
+## mnO2        1   2287  2286.8  7.3444 0.0073705 ** 
+## Cl          1   4304  4304.3 13.8239 0.0002671 ***
+## NO3         1   3418  3418.5 10.9789 0.0011118 ** 
+## NH4         1    404   403.6  1.2963 0.2563847    
+## oPO4        1   4788  4788.0 15.3774 0.0001246 ***
+## PO4         1   1406  1405.6  4.5142 0.0349635 *  
+## Chla        1    377   377.0  1.2107 0.2726544    
+## Residuals 182  56668   311.4                      
+## ---
+## Signif. codes:  
+## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+]
+
+---
+
+# 回归拟合效果图
+
+
+```r
+qplot(clean.algae$a1, fitted(lm.a1)) +
+  geom_abline(color = "red") +
+  xlab("Observation") + ylab("Prediction")
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-104-1.svg)&lt;!-- --&gt;
+
+---
+
+# 回归诊断——残差图
+
+
+```r
+plot(lm.a1, 1)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-105-1.svg)&lt;!-- --&gt;
+
+---
+
+# 回归诊断——标准化残差方根图
+
+
+```r
+plot(lm.a1, 3)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-106-1.svg)&lt;!-- --&gt;
+
+---
+
+# 多元线性回归假设验证
+
+
+```r
+library(gvlma)
+gvmodel &lt;- gvlma(lm.a1)
+summary(gvmodel)
+```
+
+.scrollbox[
+
+```
+## 
+## Call:
+## lm(formula = a1 ~ ., data = clean.algae[, 1:12])
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -37.679 -11.893  -2.567   7.410  62.190 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)  42.942055  24.010879   1.788  0.07537 . 
+## seasonspring  3.726978   4.137741   0.901  0.36892   
+## seasonsummer  0.747597   4.020711   0.186  0.85270   
+## seasonwinter  3.692955   3.865391   0.955  0.34065   
+## sizemedium    3.263728   3.802051   0.858  0.39179   
+## sizesmall     9.682140   4.179971   2.316  0.02166 * 
+## speedlow      3.922084   4.706315   0.833  0.40573   
+## speedmedium   0.246764   3.241874   0.076  0.93941   
+## mxPH         -3.589118   2.703528  -1.328  0.18598   
+## mnO2          1.052636   0.705018   1.493  0.13715   
+## Cl           -0.040172   0.033661  -1.193  0.23426   
+## NO3          -1.511235   0.551339  -2.741  0.00674 **
+## NH4           0.001634   0.001003   1.628  0.10516   
+## oPO4         -0.005435   0.039884  -0.136  0.89177   
+## PO4          -0.052241   0.030755  -1.699  0.09109 . 
+## Chla         -0.088022   0.079998  -1.100  0.27265   
+## ---
+## Signif. codes:  
+## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 17.65 on 182 degrees of freedom
+## Multiple R-squared:  0.3731,	Adjusted R-squared:  0.3215 
+## F-statistic: 7.223 on 15 and 182 DF,  p-value: 2.444e-12
+## 
+## 
+## ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+## USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+## Level of Significance =  0.05 
+## 
+## Call:
+##  gvlma(x = lm.a1) 
+## 
+##                     Value   p-value
+## Global Stat        68.695 4.274e-14
+## Skewness           36.181 1.798e-09
+## Kurtosis           14.552 1.363e-04
+## Link Function      11.901 5.611e-04
+## Heteroscedasticity  6.061 1.382e-02
+##                                      Decision
+## Global Stat        Assumptions NOT satisfied!
+## Skewness           Assumptions NOT satisfied!
+## Kurtosis           Assumptions NOT satisfied!
+## Link Function      Assumptions NOT satisfied!
+## Heteroscedasticity Assumptions NOT satisfied!
+```
+]
+
+---
+
+# 线性假设验证
+
+
+```r
+car::crPlot(lm.a1, variable = "season")
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-109-1.svg)&lt;!-- --&gt;
+
+---
+
+# 线性假设验证
+
+
+```r
+car::crPlot(lm.a1, variable = "PO4")
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-110-1.svg)&lt;!-- --&gt;
+
+---
+
+# 线性假设验证
+
+
+```r
+car::crPlot(lm.a1, variable = "Chla")
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-111-1.svg)&lt;!-- --&gt;
+
+---
+
+# 正态性验证——QQ图
+
+
+```r
+plot(lm.a1, 2)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-112-1.svg)&lt;!-- --&gt;
+
+---
+
+# 正态性验证——QQ图
+
+
+```r
+library(car)
+qqPlot(lm.a1, id.method = "identify", simulate = TRUE, main = "Q-Q Plot")
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-113-1.svg)&lt;!-- --&gt;
+
+---
+
+# 同方差性与独立性验证
+
+- 对于同方差性检验，如果p值小于0.05，可认为拒绝方差相同的假设。
+
+- 对于独立性检验，如果p值小于0.05，可认为拒绝误差之间相互独立的假设。
+
+
+```r
+library(car)
+ncvTest(lm.a1)
+```
+
+```
+## Non-constant Variance Score Test 
+## Variance formula: ~ fitted.values 
+## Chisquare = 43.04579    Df = 1     p = 5.347361e-11
+```
+
+```r
+durbinWatsonTest(lm.a1)
+```
+
+```
+##  lag Autocorrelation D-W Statistic p-value
+##    1       0.2055864      1.585636   0.002
+##  Alternative hypothesis: rho != 0
+```
+
+---
+
+# 多重共线性
+
+.pull-left[
+- 回归分析中系数的方差估计为：
+
+`$${\rm \widehat{var}}(\hat{\beta}_{j})=\frac{s^{2}}{(n-1)\widehat{{\rm var}}(X_{j})}\cdot\frac{1}{1-R_{j}^{2}}$$`
+]
+
+.pull-right[
+- 其中方差膨胀因子为：
+
+`$$VIF=\dfrac{1}{1-R_{j}^{2}}$$`
+]
+
+
+
+```r
+library(car)
+vif(lm.a1)
+```
+
+```
+##            GVIF Df GVIF^(1/(2*Df))
+## season 1.355227  3        1.051967
+## size   2.052586  2        1.196948
+## speed  1.996104  2        1.188628
+## mxPH   1.603720  1        1.266380
+## mnO2   1.797400  1        1.340671
+## Cl     1.538956  1        1.240547
+## NO3    2.742878  1        1.656164
+## NH4    2.452731  1        1.566120
+## oPO4   8.359359  1        2.891256
+## PO4    9.956597  1        3.155408
+## Chla   1.636715  1        1.279342
+```
+
+---
+
+# 离群点检验
+
+根据最大的残差值的显著性来判断是否存在离群点。
+
+- 若不显著，Bonferonni P&gt;0.05，表明没有离群点；
+
+- 若显著，Bonferonni P&lt;0.05，表明该最大残差值点为离群点，需要删去，然后对删除该点后的拟合模型再次进行离群点的检验。
+
+
+```r
+library(car)
+outlierTest(lm.a1)
+```
+
+```
+##    rstudent unadjusted p-value Bonferonni p
+## 49 3.761193         0.00022817     0.045177
+```
+
+---
+
+# 高杠杆点
+
+距离样本总体较远的点，对回归参数影响加大。杠杆值大于均值的2~3倍的样本点即可认为是高杠杆点。
+
+.scrollbox[
+
+```r
+hat.plot &lt;- function(fit) {
+  p &lt;- length(coefficients(fit))
+  n &lt;- length(fitted(fit))
+  plot(hatvalues(fit), main = "Index Plot of Hat Values")
+  abline(h = c(2, 3) * p / n, col = "red", lty = 2)
+}
+hat.plot(lm.a1)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-117-1.svg)&lt;!-- --&gt;
+]
+
+---
+
+# 强影响点
+
+强影响点是对模型的参数估计有较大的影响的点（综合考虑了残差和杠杆值），若将其删除则会导致模型发生本质的改变。
+
+
+```r
+plot(lm.a1, 4)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-118-1.svg)&lt;!-- --&gt;
+
+---
+
+# 离群点+高杠杆点+强影响点
+
+.scrollbox[
+
+```r
+influencePlot(lm.a1)
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-119-1.svg)&lt;!-- --&gt;
+
+```
+##        StudRes        Hat      CookD
+## 35  -2.4312392 0.20781069 0.09436502
+## 49   3.7611929 0.05853483 0.05126864
+## 118  3.6420862 0.06994627 0.05841365
+## 134  0.9991277 0.36360621 0.03564770
+## 153  1.3768129 0.89339121 0.98797657
+```
+]
+
+---
+
+# 逐步回归
+
+
+```r
+lm2.a1 &lt;- update(lm.a1, . ~ . - season)
+summary(lm2.a1)
+anova(lm.a1, lm2.a1)
+final.lm &lt;- step(lm.a1)
+summary(final.lm)
+```
+
+.scrollbox[
+
+```
+## 
+## Call:
+## lm(formula = a1 ~ size + speed + mxPH + mnO2 + Cl + NO3 + NH4 + 
+##     oPO4 + PO4 + Chla, data = clean.algae[, 1:12])
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -36.460 -11.953  -3.044   7.444  63.730 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept) 44.9532874 23.2378377   1.934  0.05458 . 
+## sizemedium   3.3092102  3.7825221   0.875  0.38278   
+## sizesmall   10.2730961  4.1223163   2.492  0.01358 * 
+## speedlow     3.0546270  4.6108069   0.662  0.50848   
+## speedmedium -0.2976867  3.1818585  -0.094  0.92556   
+## mxPH        -3.2684281  2.6576592  -1.230  0.22033   
+## mnO2         0.8011759  0.6589644   1.216  0.22561   
+## Cl          -0.0381881  0.0333791  -1.144  0.25407   
+## NO3         -1.5334300  0.5476550  -2.800  0.00565 **
+## NH4          0.0015777  0.0009951   1.586  0.11456   
+## oPO4        -0.0062392  0.0395086  -0.158  0.87469   
+## PO4         -0.0509543  0.0305189  -1.670  0.09669 . 
+## Chla        -0.0841371  0.0794459  -1.059  0.29096   
+## ---
+## Signif. codes:  
+## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 17.57 on 185 degrees of freedom
+## Multiple R-squared:  0.3682,	Adjusted R-squared:  0.3272 
+## F-statistic: 8.984 on 12 and 185 DF,  p-value: 1.762e-13
+```
+
+```
+## Analysis of Variance Table
+## 
+## Model 1: a1 ~ season + size + speed + mxPH + mnO2 + Cl + NO3 + NH4 + oPO4 + 
+##     PO4 + Chla
+## Model 2: a1 ~ size + speed + mxPH + mnO2 + Cl + NO3 + NH4 + oPO4 + PO4 + 
+##     Chla
+##   Res.Df   RSS Df Sum of Sq      F Pr(&gt;F)
+## 1    182 56668                           
+## 2    185 57116 -3   -447.62 0.4792 0.6971
+```
+
+```
+## Start:  AIC=1152.03
+## a1 ~ season + size + speed + mxPH + mnO2 + Cl + NO3 + NH4 + oPO4 + 
+##     PO4 + Chla
+## 
+##          Df Sum of Sq   RSS    AIC
+## - season  3    447.62 57116 1147.6
+## - speed   2    269.60 56938 1149.0
+## - oPO4    1      5.78 56674 1150.0
+## - Chla    1    376.96 57045 1151.3
+## - Cl      1    443.46 57112 1151.6
+## - mxPH    1    548.76 57217 1151.9
+## &lt;none&gt;                56668 1152.0
+## - mnO2    1    694.11 57363 1152.4
+## - NH4     1    825.67 57494 1152.9
+## - PO4     1    898.42 57567 1153.1
+## - size    2   1857.16 58526 1154.4
+## - NO3     1   2339.36 59008 1158.0
+## 
+## Step:  AIC=1147.59
+## a1 ~ size + speed + mxPH + mnO2 + Cl + NO3 + NH4 + oPO4 + PO4 + 
+##     Chla
+## 
+##         Df Sum of Sq   RSS    AIC
+## - speed  2    210.64 57327 1144.3
+## - oPO4   1      7.70 57124 1145.6
+## - Chla   1    346.27 57462 1146.8
+## - Cl     1    404.10 57520 1147.0
+## - mnO2   1    456.37 57572 1147.2
+## - mxPH   1    466.95 57583 1147.2
+## &lt;none&gt;               57116 1147.6
+## - NH4    1    776.11 57892 1148.3
+## - PO4    1    860.62 57977 1148.5
+## - size   2   2175.59 59292 1151.0
+## - NO3    1   2420.47 59537 1153.8
+## 
+## Step:  AIC=1144.31
+## a1 ~ size + mxPH + mnO2 + Cl + NO3 + NH4 + oPO4 + PO4 + Chla
+## 
+##        Df Sum of Sq   RSS    AIC
+## - oPO4  1     16.29 57343 1142.4
+## - Chla  1    223.29 57550 1143.1
+## - mnO2  1    413.77 57740 1143.7
+## - Cl    1    472.70 57799 1143.9
+## - mxPH  1    483.56 57810 1144.0
+## &lt;none&gt;              57327 1144.3
+## - NH4   1    720.19 58047 1144.8
+## - PO4   1    809.30 58136 1145.1
+## - size  2   2060.95 59388 1147.3
+## - NO3   1   2379.75 59706 1150.4
+## 
+## Step:  AIC=1142.37
+## a1 ~ size + mxPH + mnO2 + Cl + NO3 + NH4 + PO4 + Chla
+## 
+##        Df Sum of Sq   RSS    AIC
+## - Chla  1     207.7 57551 1141.1
+## - mnO2  1     402.6 57746 1141.8
+## - Cl    1     470.7 57814 1142.0
+## - mxPH  1     519.7 57863 1142.2
+## &lt;none&gt;              57343 1142.4
+## - NH4   1     704.4 58047 1142.8
+## - size  2    2050.3 59393 1145.3
+## - NO3   1    2370.4 59713 1148.4
+## - PO4   1    5818.4 63161 1159.5
+## 
+## Step:  AIC=1141.09
+## a1 ~ size + mxPH + mnO2 + Cl + NO3 + NH4 + PO4
+## 
+##        Df Sum of Sq   RSS    AIC
+## - mnO2  1     435.3 57986 1140.6
+## - Cl    1     438.1 57989 1140.6
+## &lt;none&gt;              57551 1141.1
+## - NH4   1     746.9 58298 1141.6
+## - mxPH  1     833.1 58384 1141.9
+## - size  2    2217.5 59768 1144.6
+## - NO3   1    2667.1 60218 1148.1
+## - PO4   1    6309.7 63860 1159.7
+## 
+## Step:  AIC=1140.58
+## a1 ~ size + mxPH + Cl + NO3 + NH4 + PO4
+## 
+##        Df Sum of Sq   RSS    AIC
+## - NH4   1     531.0 58517 1140.4
+## - Cl    1     584.9 58571 1140.6
+## &lt;none&gt;              57986 1140.6
+## - mxPH  1     819.1 58805 1141.4
+## - size  2    2478.2 60464 1144.9
+## - NO3   1    2251.4 60237 1146.1
+## - PO4   1    9097.9 67084 1167.4
+## 
+## Step:  AIC=1140.38
+## a1 ~ size + mxPH + Cl + NO3 + PO4
+## 
+##        Df Sum of Sq   RSS    AIC
+## &lt;none&gt;              58517 1140.4
+## - mxPH  1     784.1 59301 1141.0
+## - Cl    1     835.6 59353 1141.2
+## - NO3   1    1987.9 60505 1145.0
+## - size  2    2664.3 61181 1145.2
+## - PO4   1    8575.8 67093 1165.5
+```
+
+```
+## 
+## Call:
+## lm(formula = a1 ~ size + mxPH + Cl + NO3 + PO4, data = clean.algae[, 
+##     1:12])
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -28.874 -12.732  -3.741   8.424  62.926 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 57.28555   20.96132   2.733  0.00687 ** 
+## sizemedium   2.80050    3.40190   0.823  0.41141    
+## sizesmall   10.40636    3.82243   2.722  0.00708 ** 
+## mxPH        -3.97076    2.48204  -1.600  0.11130    
+## Cl          -0.05227    0.03165  -1.651  0.10028    
+## NO3         -0.89529    0.35148  -2.547  0.01165 *  
+## PO4         -0.05911    0.01117  -5.291 3.32e-07 ***
+## ---
+## Signif. codes:  
+## 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 17.5 on 191 degrees of freedom
+## Multiple R-squared:  0.3527,	Adjusted R-squared:  0.3324 
+## F-statistic: 17.35 on 6 and 191 DF,  p-value: 5.554e-16
+```
+]
+
+---
+
+# 回归树
+
+
+```r
+library(rpart)
+(rt.a1 &lt;- rpart(a1 ~ ., data = algae[, 1:12]))
+```
+
+.scrollbox[
+
+```
+## n= 200 
+## 
+## node), split, n, deviance, yval
+##       * denotes terminal node
+## 
+##  1) root 200 90694.880 16.923500  
+##    2) PO4&gt;=43.818 148 31359.210  8.918919  
+##      4) Cl&gt;=7.8065 141 21678.580  7.439716  
+##        8) oPO4&gt;=51.118 85  3455.770  3.801176 *
+##        9) oPO4&lt; 51.118 56 15389.430 12.962500  
+##         18) mnO2&gt;=10.05 24  1248.673  6.716667 *
+##         19) mnO2&lt; 10.05 32 12502.320 17.646870  
+##           38) NO3&gt;=3.1875 9   257.080  7.866667 *
+##           39) NO3&lt; 3.1875 23 11047.500 21.473910  
+##             78) mnO2&lt; 8 13  2919.549 13.807690 *
+##             79) mnO2&gt;=8 10  6370.704 31.440000 *
+##      5) Cl&lt; 7.8065 7  3157.769 38.714290 *
+##    3) PO4&lt; 43.818 52 22863.170 39.705770  
+##      6) mxPH&lt; 7.87 29 11643.370 32.965520  
+##       12) PO4&gt;=6.25 22  6396.318 27.609090 *
+##       13) PO4&lt; 6.25 7  2632.040 49.800000 *
+##      7) mxPH&gt;=7.87 23  8241.110 48.204350  
+##       14) PO4&gt;=15.177 12  3047.517 38.183330 *
+##       15) PO4&lt; 15.177 11  2673.945 59.136360 *
+```
+]
+
+---
+
+# 回归树作图
+
+
+```r
+library(rpart.plot)
+prp(rt.a1, extra = 101, box.col = "orange", split.box.col = "grey")
+```
+
+![](data_analysis_files/figure-html/unnamed-chunk-124-1.svg)&lt;!-- --&gt;
+
+---
+
+# 回归树剪枝
+
+
+```r
+printcp(rt.a1)
+(rt2.a1 &lt;- prune(rt.a1, cp = 0.08))
+(rt3.a1 &lt;- DMwR2::rpartXse(a1 ~ ., data = algae[, 1:12]))
+```
+
+.scrollbox[
+
+```
+## 
+## Regression tree:
+## rpart(formula = a1 ~ ., data = algae[, 1:12])
+## 
+## Variables actually used in tree construction:
+## [1] Cl   mnO2 mxPH NO3  oPO4 PO4 
+## 
+## Root node error: 90695/200 = 453.47
+## 
+## n= 200 
+## 
+##         CP nsplit rel error  xerror     xstd
+## 1 0.402145      0   1.00000 1.01490 0.130619
+## 2 0.071921      1   0.59785 0.70167 0.112339
+## 3 0.032843      2   0.52593 0.66836 0.109529
+## 4 0.031241      3   0.49309 0.65171 0.104914
+## 5 0.028833      4   0.46185 0.64180 0.103683
+## 6 0.027782      5   0.43302 0.65977 0.105366
+## 7 0.018065      6   0.40524 0.65905 0.106238
+## 8 0.016291      7   0.38717 0.67589 0.107491
+## 9 0.010000      9   0.35459 0.66288 0.099413
+```
+
+```
+## n= 200 
+## 
+## node), split, n, deviance, yval
+##       * denotes terminal node
+## 
+## 1) root 200 90694.88 16.923500  
+##   2) PO4&gt;=43.818 148 31359.21  8.918919 *
+##   3) PO4&lt; 43.818 52 22863.17 39.705770 *
+```
+
+```
+## n= 200 
+## 
+## node), split, n, deviance, yval
+##       * denotes terminal node
+## 
+## 1) root 200 90694.88 16.923500  
+##   2) PO4&gt;=43.818 148 31359.21  8.918919 *
+##   3) PO4&lt; 43.818 52 22863.17 39.705770 *
+```
+]
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
